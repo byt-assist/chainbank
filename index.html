@@ -168,15 +168,30 @@ let userName = localStorage.getItem('userName') || '';
 document.getElementById('userWallet').value = userWallet;
 document.getElementById('userName').value = userName;
 
-// Функция обновления календаря (переводится при смене языка)
+// Функция обновления календаря (с переводами имён святых)
 function updateCalendar() {
-    const orthodoxSaints = {5: {20: "Св. Патрик Белыничский"}, 6: {1: "Св. Иустин Попович", 2: "Св. Иоанн Шанхайский", 3: "Св. Константин"}};
+    // Православные святые на разных языках
+    const orthodoxSaints = {
+        en: {5: {20: "St. Patrick of Belynichi", 21: "St. Nicholas of Japan"}},
+        ru: {5: {20: "Св. Патрик Белыничский", 21: "Св. Николай Японский"}},
+        es: {5: {20: "San Patricio de Belynichi", 21: "San Nicolás de Japón"}},
+        zh: {5: {20: "别雷尼奇的圣帕特里克", 21: "日本的圣尼古拉"}},
+        fr: {5: {20: "Saint Patrick de Belynichi", 21: "Saint Nicolas du Japon"}},
+        de: {5: {20: "Hl. Patrick von Belynichi", 21: "Hl. Nikolaus von Japan"}},
+        it: {5: {20: "San Patrizio di Belynichi", 21: "San Nicola del Giappone"}},
+        ja: {5: {20: "ベリニチの聖パトリック", 21: "日本の聖ニコライ"}}
+    };
+    
     const today = new Date();
     const month = today.getMonth() + 1;
     const day = today.getDate();
-    let saint = (orthodoxSaints[month] && orthodoxSaints[month][day]) ? orthodoxSaints[month][day] : (translations[currentLang]?.ordinary_day || "Рядовой день");
+    
+    const langSaints = orthodoxSaints[currentLang] || orthodoxSaints.en;
+    let saint = (langSaints[month] && langSaints[month][day]) ? langSaints[month][day] : (translations[currentLang]?.ordinary_day || "Рядовой день");
+    
     const dateStr = today.toLocaleDateString(currentLang === 'ru' ? 'ru' : 'en', {month: 'long', day: 'numeric'});
     const lightCandleText = translations[currentLang]?.light_candle || "🕯️ Зажгите свечу в его честь";
+    
     document.getElementById('calendar').innerHTML = `<div class="text-center"><div class="text-gold-light text-lg">${dateStr}</div><div class="text-xl font-bold">${saint}</div><div class="text-sm opacity-70 mt-1">${lightCandleText}</div></div>`;
 }
 
@@ -194,7 +209,7 @@ function updateTopDonors() {
     document.getElementById('topDonors').innerHTML = topHtml;
 }
 
-// Переопределяем setLanguage, чтобы обновлять календарь и топ доноров
+// Переопределяем setLanguage
 const originalSetLanguage = setLanguage;
 window.setLanguage = function(lang) {
     originalSetLanguage(lang);
@@ -203,7 +218,7 @@ window.setLanguage = function(lang) {
 };
 setLanguage = window.setLanguage;
 
-// Сохранение данных пользователя
+// Сохранение данных
 document.getElementById('saveDataBtn').onclick = () => {
     localStorage.setItem('userWallet', document.getElementById('userWallet').value);
     localStorage.setItem('userName', document.getElementById('userName').value);
@@ -212,13 +227,11 @@ document.getElementById('saveDataBtn').onclick = () => {
     alert(translations[currentLang]?.saved_msg || 'Сохранено');
 };
 
-// Копирование кошелька
 document.getElementById('copyWalletBtn').onclick = () => {
     navigator.clipboard.writeText("GD7BH3LZ1JNyn5Nb5w4C4b2iR6FTW5dd6aN4vczwQdkD");
     alert(translations[currentLang]?.copied_msg || 'Скопировано');
 };
 
-// Показать форму ввода TXID
 function showTxidForm(action, desc) {
     if (!userWallet) {
         alert(translations[currentLang]?.need_wallet || 'Введите кошелёк');
@@ -235,7 +248,6 @@ document.getElementById('forGodBtn').onclick = () => showTxidForm('forGod', `${t
 document.getElementById('againstGodBtn').onclick = () => showTxidForm('againstGod', `${translations[currentLang]?.send_bog_desc || 'Отправьте 1 BOG на адрес DEMON'} (${ADDRESSES.DEMON}). ${translations[currentLang]?.txid_placeholder || 'Вставьте TXID'}:`);
 document.getElementById('eternalBtn').onclick = () => showTxidForm('eternal', `${translations[currentLang]?.send_eternal_desc || 'Отправьте 1 USVT + 1 DEMON на адрес BOG'} (${ADDRESSES.BOG}). ${translations[currentLang]?.txid_placeholder || 'Вставьте TXID'}:`);
 
-// Проверка TXID через Solscan
 document.getElementById('verifyBtn').onclick = async () => {
     const txid = document.getElementById('txidInput').value.trim();
     if (!txid) {
@@ -304,11 +316,9 @@ function updateCounters() {
 setInterval(updateCounters, 60000);
 updateCounters();
 
-// Инициализация календаря и топа доноров
 updateCalendar();
 updateTopDonors();
 
-// Реферальная ссылка
 let refLink = document.getElementById('refLink');
 refLink.value = `${window.location.origin}?ref=${userWallet || 'guest'}`;
 document.getElementById('copyRefBtn').onclick = () => {
