@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Исповедь · Chain Bank</title>
+    <title>Confession · Chain Bank</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="lang.js"></script>
     <style>
-        body{background:radial-gradient(circle at 10%20%,#1A1510,#0D0A07);color:#F5E6D3;}
-        .glass{background:rgba(44,36,24,0.75);backdrop-filter:blur(12px);border-radius:24px;padding:1.5rem;margin-bottom:1.5rem;}
+        body{background:radial-gradient(circle at 10%20%,#1A1510,#0D0A07);color:#F5E6D3;font-family:'Inter',sans-serif;}
+        .glass{background:rgba(44,36,24,0.75);backdrop-filter:blur(12px);border-radius:24px;padding:1.5rem;margin-bottom:1.5rem;border:1px solid rgba(197,160,89,0.3);}
         .btn-primary{background:linear-gradient(90deg,#8B6914,#C5A059,#FFDF85);color:#1A1510;padding:0.5rem 1.2rem;border-radius:40px;display:inline-block;cursor:pointer;}
         .btn-secondary{background:rgba(197,160,89,0.15);border:1px solid rgba(197,160,89,0.4);padding:0.5rem 1.2rem;border-radius:40px;display:inline-block;cursor:pointer;}
         .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);backdrop-filter:blur(8px);justify-content:center;align-items:center;z-index:1000;}
@@ -19,123 +19,36 @@
 </head>
 <body class="p-4">
 <div class="max-w-3xl mx-auto">
-    <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold">🙏 Исповедь</h1>
-        <a href="index.html" class="btn-secondary">← На главную</a>
-    </div>
-    <div class="glass">
-        <h2 class="text-xl font-bold mb-3">Напишите ваш грех (анонимно)</h2>
-        <textarea id="sinText" rows="4" class="w-full p-3 rounded-xl bg-black/50 border border-gold/30 mb-3" placeholder="Опишите, что тяготит вашу душу..."></textarea>
-        <button id="showAddressBtn" class="btn-primary w-full py-2 rounded-full">📨 Отправить исповедь (1 USVT)</button>
-    </div>
-    <div class="glass">
-        <h2 class="text-xl font-bold mb-3">💬 Грехи и ответы</h2>
-        <div id="confessionsList" class="space-y-3 max-h-96 overflow-y-auto"></div>
-    </div>
+    <div class="flex justify-between items-center mb-6"><h1 class="text-3xl font-bold">🙏 Confession</h1><a href="index.html" class="btn-secondary">← Back to Home</a></div>
+    <div class="glass"><h2 class="text-xl font-bold mb-3">Write your sin (anonymous)</h2><textarea id="sinText" rows="4" class="w-full p-3 rounded-xl bg-black/50 border border-gold/30 mb-3" placeholder="Describe what burdens your soul..."></textarea><button id="showAddressBtn" class="btn-primary w-full py-2 rounded-full">📨 Send confession (1 USVT)</button></div>
+    <div class="glass"><h2 class="text-xl font-bold mb-3">💬 Sins and answers</h2><div id="confessionsList" class="space-y-3 max-h-96 overflow-y-auto"></div></div>
 </div>
 
-<!-- Модальное окно для адреса и TXID -->
 <div id="confessionModal" class="modal">
     <div class="modal-content">
-        <h3 class="text-xl font-bold mb-2 text-gold-light">📿 Отправьте исповедь</h3>
-        <p class="text-sm mb-2">Отправьте 1 USVT на адрес Бога, затем вставьте TXID:</p>
-        <div class="address-box"><strong>📤 Адрес Бога:</strong><br>DpgFgCXatvnegBAHBkNpd2cbEiyFL8E9sY1o6mp4EGhe</div>
-        <button id="copyGodAddressBtn" class="copy-btn mb-3">📋 Копировать адрес</button>
-        <input type="text" id="txidInput" class="w-full p-2 rounded bg-black/50 border border-gold/30 mb-2" placeholder="Вставьте TXID">
-        <button id="submitConfessionBtn" class="btn-primary w-full py-2 rounded-full">✅ Подтвердить исповедь</button>
+        <h3 class="text-xl font-bold mb-2 text-gold-light">📿 Send your confession</h3>
+        <p class="text-sm mb-2">Send 1 USVT to God's address, then paste TXID:</p>
+        <div class="address-box"><strong>📤 God's address:</strong><br>DpgFgCXatvnegBAHBkNpd2cbEiyFL8E9sY1o6mp4EGhe</div>
+        <button id="copyGodAddressBtn" class="copy-btn mb-3">📋 Copy address</button>
+        <input type="text" id="txidInput" class="w-full p-2 rounded bg-black/50 border border-gold/30 mb-2" placeholder="Paste TXID">
+        <button id="submitConfessionBtn" class="btn-primary w-full py-2 rounded-full">✅ Confirm confession</button>
         <div id="confessionStatus" class="text-xs mt-2 text-center"></div>
-        <button id="closeConfessionModal" class="btn-secondary w-full mt-3 py-2 rounded-full">Закрыть</button>
+        <button id="closeConfessionModal" class="btn-secondary w-full mt-3 py-2 rounded-full">Close</button>
     </div>
 </div>
 
 <script>
 const GOD_ADDRESS = "DpgFgCXatvnegBAHBkNpd2cbEiyFL8E9sY1o6mp4EGhe";
-let currentLang = 'ru';
 let userWallet = localStorage.getItem('userWallet') || '';
-
-const answers = {
-    ru: ["Прочитайте молитву «Отче наш» 3 раза.", "Поститесь три дня.", "Исповедуйтесь священнику в храме.", "Бог простит, идите с миром.", "Помогите ближнему — это очистит душу."],
-    en: ["Pray the 'Our Father' 3 times.", "Fast for three days.", "Confess to a priest.", "God forgives, go in peace.", "Help your neighbor."]
-};
-
-function getRandomAnswer() {
-    const list = answers['ru'];
-    return list[Math.floor(Math.random() * list.length)];
-}
-
+const answers = { en: ["Pray the 'Our Father' 3 times.", "Fast for three days.", "Confess to a priest in the church.", "God forgives, go in peace.", "Help your neighbor — it will cleanse your soul."] };
+function getRandomAnswer() { const list = answers.en; return list[Math.floor(Math.random() * list.length)]; }
 let confessions = JSON.parse(localStorage.getItem('confessions') || '[]');
-
-function renderConfessions() {
-    const container = document.getElementById('confessionsList');
-    if (confessions.length === 0) {
-        container.innerHTML = '<div class="opacity-60 text-center">Пока нет исповедей. Будьте первым!</div>';
-        return;
-    }
-    container.innerHTML = confessions.map(c => `
-        <div class="p-3 rounded bg-black/30 border border-gold/30">
-            <div class="italic">${c.text}</div>
-            <div class="text-sm text-gold-light mt-1">💬 ${c.answer}</div>
-            <div class="text-xs opacity-50 mt-1">Грешник #${c.id} · ${c.date}</div>
-        </div>
-    `).join('');
-}
-
-document.getElementById('showAddressBtn').onclick = () => {
-    document.getElementById('confessionModal').style.display = 'flex';
-    document.getElementById('txidInput').value = '';
-    document.getElementById('confessionStatus').innerHTML = '';
-};
-
-document.getElementById('copyGodAddressBtn').onclick = () => {
-    navigator.clipboard.writeText(GOD_ADDRESS);
-    alert('Адрес скопирован');
-};
-
-document.getElementById('submitConfessionBtn').onclick = async () => {
-    const sinText = document.getElementById('sinText').value.trim();
-    const txid = document.getElementById('txidInput').value.trim();
-    if (!sinText) { alert('Напишите ваш грех'); return; }
-    if (!txid) { alert('Введите TXID'); return; }
-    if (!userWallet) { alert('Сначала сохраните ваш кошелёк на главной странице'); return; }
-    document.getElementById('confessionStatus').innerHTML = '⏳ Проверяем...';
-    try {
-        const url = `https://public-api.solscan.io/transaction/${txid}`;
-        const resp = await fetch(url);
-        const data = await resp.json();
-        if (!data || !data.txId) throw new Error('Транзакция не найдена');
-        const signer = data.signer?.[0] || data.accountKeys?.[0];
-        if (signer !== userWallet) throw new Error('TXID не с вашего кошелька');
-        const transfer = data.tokenTransfers?.find(t => t.to === GOD_ADDRESS && parseInt(t.amount) >= 1_000_000_000);
-        if (!transfer) throw new Error('Не найден перевод 1 USVT на адрес Бога');
-        
-        const newConfession = {
-            id: Math.floor(Math.random() * 10000),
-            text: sinText,
-            answer: getRandomAnswer(),
-            date: new Date().toLocaleString(),
-            txid: txid
-        };
-        confessions.unshift(newConfession);
-        localStorage.setItem('confessions', JSON.stringify(confessions));
-        document.getElementById('confessionStatus').innerHTML = '✅ Исповедь принята!';
-        document.getElementById('sinText').value = '';
-        document.getElementById('txidInput').value = '';
-        renderConfessions();
-        setTimeout(() => { document.getElementById('confessionModal').style.display = 'none'; }, 1500);
-    } catch (err) {
-        document.getElementById('confessionStatus').innerHTML = `❌ ${err.message}`;
-    }
-};
-
-document.getElementById('closeConfessionModal').onclick = () => {
-    document.getElementById('confessionModal').style.display = 'none';
-};
-window.onclick = (e) => {
-    if (e.target === document.getElementById('confessionModal')) {
-        document.getElementById('confessionModal').style.display = 'none';
-    }
-};
-
+function renderConfessions() { const container = document.getElementById('confessionsList'); if (confessions.length === 0) { container.innerHTML = '<div class="opacity-60 text-center">No confessions yet. Be the first!</div>'; return; } container.innerHTML = confessions.map(c => `<div class="p-3 rounded bg-black/30 border border-gold/30"><div class="italic">${c.text}</div><div class="text-sm text-gold-light mt-1">💬 ${c.answer}</div><div class="text-xs opacity-50 mt-1">Sinner #${c.id} · ${c.date}</div></div>`).join(''); }
+document.getElementById('showAddressBtn').onclick = () => { document.getElementById('confessionModal').style.display = 'flex'; document.getElementById('txidInput').value = ''; document.getElementById('confessionStatus').innerHTML = ''; };
+document.getElementById('copyGodAddressBtn').onclick = () => { navigator.clipboard.writeText(GOD_ADDRESS); alert('Address copied'); };
+document.getElementById('submitConfessionBtn').onclick = async () => { const sinText = document.getElementById('sinText').value.trim(); const txid = document.getElementById('txidInput').value.trim(); if (!sinText) { alert('Write your sin'); return; } if (!txid) { alert('Enter TXID'); return; } if (!userWallet) { alert('First save your wallet on the main page'); return; } document.getElementById('confessionStatus').innerHTML = '⏳ Verifying...'; try { const url = `https://public-api.solscan.io/transaction/${txid}`; const resp = await fetch(url); const data = await resp.json(); if (!data || !data.txId) throw new Error('Transaction not found'); const signer = data.signer?.[0] || data.accountKeys?.[0]; if (signer !== userWallet) throw new Error('TXID not from your wallet'); const transfer = data.tokenTransfers?.find(t => t.to === GOD_ADDRESS && parseInt(t.amount) >= 1_000_000_000); if (!transfer) throw new Error('No 1 USVT transfer to God address found'); const newConfession = { id: Math.floor(Math.random() * 10000), text: sinText, answer: getRandomAnswer(), date: new Date().toLocaleString(), txid: txid }; confessions.unshift(newConfession); localStorage.setItem('confessions', JSON.stringify(confessions)); document.getElementById('confessionStatus').innerHTML = '✅ Confession accepted!'; document.getElementById('sinText').value = ''; document.getElementById('txidInput').value = ''; renderConfessions(); setTimeout(() => { document.getElementById('confessionModal').style.display = 'none'; }, 1500); } catch (err) { document.getElementById('confessionStatus').innerHTML = `❌ ${err.message}`; } };
+document.getElementById('closeConfessionModal').onclick = () => { document.getElementById('confessionModal').style.display = 'none'; };
+window.onclick = (e) => { if (e.target === document.getElementById('confessionModal')) document.getElementById('confessionModal').style.display = 'none'; };
 renderConfessions();
 </script>
 </body>
