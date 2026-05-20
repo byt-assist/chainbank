@@ -19,8 +19,13 @@
 </head>
 <body class="p-4">
 <div class="max-w-6xl mx-auto">
-    <div class="flex justify-between items-center mb-6"><h1 class="text-3xl font-bold" data-i18n="actions_title">🙏 40 духовных дел</h1><a href="index.html" class="btn-secondary" data-i18n="back">← На главную</a></div>
-    <div class="glass text-center mb-6"><p class="italic" data-i18n="actions_desc">Нажмите на любое дело → откроется окно с адресом и инструкцией → отправьте токены → вставьте TXID → получите подтверждение</p></div>
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold" data-i18n="actions_title">🙏 40 духовных дел</h1>
+        <a href="index.html" class="btn-secondary" data-i18n="back">← На главную</a>
+    </div>
+    <div class="glass text-center mb-6">
+        <p class="italic" data-i18n="actions_desc">Нажмите на любое дело → откроется окно с адресом и инструкцией → отправьте токены → вставьте TXID → получите подтверждение</p>
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="actionsList"></div>
 </div>
 
@@ -41,55 +46,174 @@
 <script>
 const GOD_ADDRESS = "DpgFgCXatvnegBAHBkNpd2cbEiyFL8E9sY1o6mp4EGhe";
 const DEMON_ADDRESS = "NbKJV6mn8NxnbXVPmBX6vxcdriVf7Pozjkwb9QJKETu";
-const actions = [
-    { id:1, name:"🕯️ "+(translations[currentLang]?.candle1||"Обычная свеча"), desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
-    { id:2, name:"✨ "+(translations[currentLang]?.candle2||"Вечная свеча"), desc:"Отправьте 1 USVT + 1 DEMON на адрес Бога", address:GOD_ADDRESS, token:"USVT+DEMON", amount:"1+1" },
-    { id:3, name:"🏛️ "+(translations[currentLang]?.candle3||"Соборная свеча"), desc:"Отправьте 10 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"10" },
-    { id:4, name:"📿 "+(translations[currentLang]?.prayer1||"Именная молитва"), desc:"Отправьте 5 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"5" },
-    { id:5, name:"📆 "+(translations[currentLang]?.sorokoust||"Сорокоуст (40 дней)"), desc:"Отправьте 40 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"40" },
-    { id:6, name:"📅 "+(translations[currentLang]?.year_candle||"Годовая свеча"), desc:"Отправьте 365 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"365" },
-    { id:7, name:"⛪ "+(translations[currentLang]?.church_memory||"Поминовение в храме"), desc:"Отправьте 100 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"100" },
-    { id:8, name:"📖 "+(translations[currentLang]?.prayer_rule||"Молитвенное правило"), desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
-    { id:9, name:"🎨 "+(translations[currentLang]?.avatar||"Аватар святого"), desc:"Отправьте 50 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"50" },
-    { id:10, name:"🖼️ "+(translations[currentLang]?.icon_gallery||"Икона в галерее"), desc:"Отправьте 100 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"100" },
-    { id:11, name:"🙏 "+(translations[currentLang]?.moleben||"Молебен онлайн"), desc:"Отправьте 20 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"20" },
-    { id:12, name:"🤝 "+(translations[currentLang]?.donation||"Пожертвование"), desc:"Отправьте любую сумму USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"любая" },
-    { id:13, name:"🏅 "+(translations[currentLang]?.friend_monastery||"Друг монастыря"), desc:"Отправьте 50 USVT (месяц) на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"50/мес" },
-    { id:14, name:"🗳️ "+(translations[currentLang]?.create_vote||"Создать голосование"), desc:"Отправьте 100 BOG на адрес DEMON", address:DEMON_ADDRESS, token:"BOG", amount:"100" },
-    { id:15, name:"⚡ "+(translations[currentLang]?.veto||"Усилить голос"), desc:"Отправьте 1000 BOG на адрес DEMON", address:DEMON_ADDRESS, token:"BOG", amount:"1000" },
-    { id:16, name:"👑 "+(translations[currentLang]?.elder||"Старейшина"), desc:"Отправьте 500 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"500" },
-    { id:17, name:"📢 "+(translations[currentLang]?.advert||"Реклама на сайте"), desc:"Отправьте 200 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"200" },
-    { id:18, name:"🖼️ "+(translations[currentLang]?.nft_icon||"NFT-икона"), desc:"Отправьте 50 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"50" },
-    { id:19, name:"🕊️ "+(translations[currentLang]?.relics||"Фрагмент мощей"), desc:"Отправьте 500 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"500" },
-    { id:20, name:"👥 "+(translations[currentLang]?.apostles||"12 апостолов"), desc:"Отправьте 600 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"600" },
-    { id:21, name:"🎓 "+(translations[currentLang]?.pilgrim_cert||"Сертификат паломника"), desc:"Отправьте 30 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"30" },
-    { id:22, name:"💀 "+(translations[currentLang]?.desecrate||"Осквернить свечу"), desc:"Отправьте 1 DEMON на адрес Бога", address:GOD_ADDRESS, token:"DEMON", amount:"1" },
-    { id:23, name:"⚫ "+(translations[currentLang]?.black_candle||"Чёрная свеча"), desc:"Отправьте 1 DEMON на адрес Бога", address:GOD_ADDRESS, token:"DEMON", amount:"1" },
-    { id:24, name:"👿 "+(translations[currentLang]?.blasphemer||"Богохульник недели"), desc:"Отправьте 100 DEMON на адрес Бога", address:GOD_ADDRESS, token:"DEMON", amount:"100" },
-    { id:25, name:"🗑️ "+(translations[currentLang]?.remove_icon||"Снять икону"), desc:"Отправьте 50 DEMON на адрес Бога", address:GOD_ADDRESS, token:"DEMON", amount:"50" },
-    { id:26, name:"🙏 "+(translations[currentLang]?.for_loved||"За любимого человека"), desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
-    { id:27, name:"🕯️ "+(translations[currentLang]?.for_health||"За здоровье близкого"), desc:"Отправьте 3 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"3" },
-    { id:28, name:"🍀 "+(translations[currentLang]?.for_luck||"За удачу в делах"), desc:"Отправьте 5 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"5" },
-    { id:29, name:"✈️ "+(translations[currentLang]?.for_travelers||"За путешествующих"), desc:"Отправьте 2 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"2" },
-    { id:30, name:"🏠 "+(translations[currentLang]?.for_family||"За благополучие семьи"), desc:"Отправьте 10 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"10" },
-    { id:31, name:"⚰️ "+(translations[currentLang]?.for_deceased||"За усопших"), desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
-    { id:32, name:"💪 "+(translations[currentLang]?.for_self_health||"За здравие своё"), desc:"Отправьте 2 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"2" },
-    { id:33, name:"🙌 "+(translations[currentLang]?.forgiveness||"За прощение грехов"), desc:"Отправьте 7 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"7" },
-    { id:34, name:"⛪ "+(translations[currentLang]?.strengthen_faith||"За укрепление веры"), desc:"Отправьте 5 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"5" },
-    { id:35, name:"😌 "+(translations[currentLang]?.despondency||"За избавление от уныния"), desc:"Отправьте 3 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"3" },
-    { id:36, name:"🌍 "+(translations[currentLang]?.for_all_orthodox||"За всех православных"), desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
-    { id:37, name:"🕊️ "+(translations[currentLang]?.for_peace||"За мир во всём мире"), desc:"Отправьте 10 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"10" },
-    { id:38, name:"🤒 "+(translations[currentLang]?.for_sick||"За болящих и страждущих"), desc:"Отправьте 5 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"5" },
-    { id:39, name:"🛡️ "+(translations[currentLang]?.for_oppressed||"За обиженных и угнетённых"), desc:"Отправьте 3 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"3" },
-    { id:40, name:"🕯️ "+(translations[currentLang]?.for_forgotten||"За всех усопших безродных"), desc:"Отправьте 2 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"2" }
+
+// Все 40 дел с ключами для перевода
+const actionsKeys = [
+    { id:1, nameKey:"deed1", descKey:"deed1_desc", token:"USVT", amount:"1", address:GOD_ADDRESS },
+    { id:2, nameKey:"deed2", descKey:"deed2_desc", token:"USVT+DEMON", amount:"1+1", address:GOD_ADDRESS },
+    { id:3, nameKey:"deed3", descKey:"deed3_desc", token:"USVT", amount:"10", address:GOD_ADDRESS },
+    { id:4, nameKey:"deed4", descKey:"deed4_desc", token:"USVT", amount:"5", address:GOD_ADDRESS },
+    { id:5, nameKey:"deed5", descKey:"deed5_desc", token:"USVT", amount:"40", address:GOD_ADDRESS },
+    { id:6, nameKey:"deed6", descKey:"deed6_desc", token:"USVT", amount:"365", address:GOD_ADDRESS },
+    { id:7, nameKey:"deed7", descKey:"deed7_desc", token:"USVT", amount:"100", address:GOD_ADDRESS },
+    { id:8, nameKey:"deed8", descKey:"deed8_desc", token:"USVT", amount:"1", address:GOD_ADDRESS },
+    { id:9, nameKey:"deed9", descKey:"deed9_desc", token:"USVT", amount:"50", address:GOD_ADDRESS },
+    { id:10, nameKey:"deed10", descKey:"deed10_desc", token:"USVT", amount:"100", address:GOD_ADDRESS },
+    { id:11, nameKey:"deed11", descKey:"deed11_desc", token:"USVT", amount:"20", address:GOD_ADDRESS },
+    { id:12, nameKey:"deed12", descKey:"deed12_desc", token:"USVT", amount:"any", address:GOD_ADDRESS },
+    { id:13, nameKey:"deed13", descKey:"deed13_desc", token:"USVT", amount:"50/month", address:GOD_ADDRESS },
+    { id:14, nameKey:"deed14", descKey:"deed14_desc", token:"BOG", amount:"100", address:DEMON_ADDRESS },
+    { id:15, nameKey:"deed15", descKey:"deed15_desc", token:"BOG", amount:"1000", address:DEMON_ADDRESS },
+    { id:16, nameKey:"deed16", descKey:"deed16_desc", token:"USVT", amount:"500", address:GOD_ADDRESS },
+    { id:17, nameKey:"deed17", descKey:"deed17_desc", token:"USVT", amount:"200", address:GOD_ADDRESS },
+    { id:18, nameKey:"deed18", descKey:"deed18_desc", token:"USVT", amount:"50", address:GOD_ADDRESS },
+    { id:19, nameKey:"deed19", descKey:"deed19_desc", token:"USVT", amount:"500", address:GOD_ADDRESS },
+    { id:20, nameKey:"deed20", descKey:"deed20_desc", token:"USVT", amount:"600", address:GOD_ADDRESS },
+    { id:21, nameKey:"deed21", descKey:"deed21_desc", token:"USVT", amount:"30", address:GOD_ADDRESS },
+    { id:22, nameKey:"deed22", descKey:"deed22_desc", token:"DEMON", amount:"1", address:GOD_ADDRESS },
+    { id:23, nameKey:"deed23", descKey:"deed23_desc", token:"DEMON", amount:"1", address:GOD_ADDRESS },
+    { id:24, nameKey:"deed24", descKey:"deed24_desc", token:"DEMON", amount:"100", address:GOD_ADDRESS },
+    { id:25, nameKey:"deed25", descKey:"deed25_desc", token:"DEMON", amount:"50", address:GOD_ADDRESS },
+    { id:26, nameKey:"deed26", descKey:"deed26_desc", token:"USVT", amount:"1", address:GOD_ADDRESS },
+    { id:27, nameKey:"deed27", descKey:"deed27_desc", token:"USVT", amount:"3", address:GOD_ADDRESS },
+    { id:28, nameKey:"deed28", descKey:"deed28_desc", token:"USVT", amount:"5", address:GOD_ADDRESS },
+    { id:29, nameKey:"deed29", descKey:"deed29_desc", token:"USVT", amount:"2", address:GOD_ADDRESS },
+    { id:30, nameKey:"deed30", descKey:"deed30_desc", token:"USVT", amount:"10", address:GOD_ADDRESS },
+    { id:31, nameKey:"deed31", descKey:"deed31_desc", token:"USVT", amount:"1", address:GOD_ADDRESS },
+    { id:32, nameKey:"deed32", descKey:"deed32_desc", token:"USVT", amount:"2", address:GOD_ADDRESS },
+    { id:33, nameKey:"deed33", descKey:"deed33_desc", token:"USVT", amount:"7", address:GOD_ADDRESS },
+    { id:34, nameKey:"deed34", descKey:"deed34_desc", token:"USVT", amount:"5", address:GOD_ADDRESS },
+    { id:35, nameKey:"deed35", descKey:"deed35_desc", token:"USVT", amount:"3", address:GOD_ADDRESS },
+    { id:36, nameKey:"deed36", descKey:"deed36_desc", token:"USVT", amount:"1", address:GOD_ADDRESS },
+    { id:37, nameKey:"deed37", descKey:"deed37_desc", token:"USVT", amount:"10", address:GOD_ADDRESS },
+    { id:38, nameKey:"deed38", descKey:"deed38_desc", token:"USVT", amount:"5", address:GOD_ADDRESS },
+    { id:39, nameKey:"deed39", descKey:"deed39_desc", token:"USVT", amount:"3", address:GOD_ADDRESS },
+    { id:40, nameKey:"deed40", descKey:"deed40_desc", token:"USVT", amount:"2", address:GOD_ADDRESS }
 ];
+
 let currentAction = null;
 let userWallet = localStorage.getItem('userWallet') || '';
+
+function getActionName(key) {
+    const names = {
+        deed1: "🕯️ " + (translations[currentLang]?.deed1 || "Обычная свеча"),
+        deed2: "✨ " + (translations[currentLang]?.deed2 || "Вечная свеча"),
+        deed3: "🏛️ " + (translations[currentLang]?.deed3 || "Соборная свеча"),
+        deed4: "📿 " + (translations[currentLang]?.deed4 || "Именная молитва"),
+        deed5: "📆 " + (translations[currentLang]?.deed5 || "Сорокоуст (40 дней)"),
+        deed6: "📅 " + (translations[currentLang]?.deed6 || "Годовая свеча"),
+        deed7: "⛪ " + (translations[currentLang]?.deed7 || "Поминовение в храме"),
+        deed8: "📖 " + (translations[currentLang]?.deed8 || "Молитвенное правило"),
+        deed9: "🎨 " + (translations[currentLang]?.deed9 || "Аватар святого"),
+        deed10: "🖼️ " + (translations[currentLang]?.deed10 || "Икона в галерее"),
+        deed11: "🙏 " + (translations[currentLang]?.deed11 || "Молебен онлайн"),
+        deed12: "🤝 " + (translations[currentLang]?.deed12 || "Пожертвование"),
+        deed13: "🏅 " + (translations[currentLang]?.deed13 || "Друг монастыря"),
+        deed14: "🗳️ " + (translations[currentLang]?.deed14 || "Создать голосование"),
+        deed15: "⚡ " + (translations[currentLang]?.deed15 || "Усилить голос"),
+        deed16: "👑 " + (translations[currentLang]?.deed16 || "Старейшина"),
+        deed17: "📢 " + (translations[currentLang]?.deed17 || "Реклама на сайте"),
+        deed18: "🖼️ " + (translations[currentLang]?.deed18 || "NFT-икона"),
+        deed19: "🕊️ " + (translations[currentLang]?.deed19 || "Фрагмент мощей"),
+        deed20: "👥 " + (translations[currentLang]?.deed20 || "12 апостолов"),
+        deed21: "🎓 " + (translations[currentLang]?.deed21 || "Сертификат паломника"),
+        deed22: "💀 " + (translations[currentLang]?.deed22 || "Осквернить свечу"),
+        deed23: "⚫ " + (translations[currentLang]?.deed23 || "Чёрная свеча"),
+        deed24: "👿 " + (translations[currentLang]?.deed24 || "Богохульник недели"),
+        deed25: "🗑️ " + (translations[currentLang]?.deed25 || "Снять икону"),
+        deed26: "🙏 " + (translations[currentLang]?.deed26 || "За любимого человека"),
+        deed27: "🕯️ " + (translations[currentLang]?.deed27 || "За здоровье близкого"),
+        deed28: "🍀 " + (translations[currentLang]?.deed28 || "За удачу в делах"),
+        deed29: "✈️ " + (translations[currentLang]?.deed29 || "За путешествующих"),
+        deed30: "🏠 " + (translations[currentLang]?.deed30 || "За благополучие семьи"),
+        deed31: "⚰️ " + (translations[currentLang]?.deed31 || "За усопших"),
+        deed32: "💪 " + (translations[currentLang]?.deed32 || "За здравие своё"),
+        deed33: "🙌 " + (translations[currentLang]?.deed33 || "За прощение грехов"),
+        deed34: "⛪ " + (translations[currentLang]?.deed34 || "За укрепление веры"),
+        deed35: "😌 " + (translations[currentLang]?.deed35 || "За избавление от уныния"),
+        deed36: "🌍 " + (translations[currentLang]?.deed36 || "За всех православных"),
+        deed37: "🕊️ " + (translations[currentLang]?.deed37 || "За мир во всём мире"),
+        deed38: "🤒 " + (translations[currentLang]?.deed38 || "За болящих и страждущих"),
+        deed39: "🛡️ " + (translations[currentLang]?.deed39 || "За обиженных и угнетённых"),
+        deed40: "🕯️ " + (translations[currentLang]?.deed40 || "За всех усопших безродных")
+    };
+    return names[key] || key;
+}
+
+function getActionDesc(key) {
+    const descs = {
+        deed1_desc: translations[currentLang]?.deed1_desc || "Отправьте 1 USVT на адрес Бога",
+        deed2_desc: translations[currentLang]?.deed2_desc || "Отправьте 1 USVT + 1 DEMON на адрес Бога",
+        deed3_desc: translations[currentLang]?.deed3_desc || "Отправьте 10 USVT на адрес Бога",
+        deed4_desc: translations[currentLang]?.deed4_desc || "Отправьте 5 USVT на адрес Бога",
+        deed5_desc: translations[currentLang]?.deed5_desc || "Отправьте 40 USVT на адрес Бога",
+        deed6_desc: translations[currentLang]?.deed6_desc || "Отправьте 365 USVT на адрес Бога",
+        deed7_desc: translations[currentLang]?.deed7_desc || "Отправьте 100 USVT на адрес Бога",
+        deed8_desc: translations[currentLang]?.deed8_desc || "Отправьте 1 USVT на адрес Бога",
+        deed9_desc: translations[currentLang]?.deed9_desc || "Отправьте 50 USVT на адрес Бога",
+        deed10_desc: translations[currentLang]?.deed10_desc || "Отправьте 100 USVT на адрес Бога",
+        deed11_desc: translations[currentLang]?.deed11_desc || "Отправьте 20 USVT на адрес Бога",
+        deed12_desc: translations[currentLang]?.deed12_desc || "Отправьте любую сумму USVT на адрес Бога",
+        deed13_desc: translations[currentLang]?.deed13_desc || "Отправьте 50 USVT (месяц) на адрес Бога",
+        deed14_desc: translations[currentLang]?.deed14_desc || "Отправьте 100 BOG на адрес DEMON",
+        deed15_desc: translations[currentLang]?.deed15_desc || "Отправьте 1000 BOG на адрес DEMON",
+        deed16_desc: translations[currentLang]?.deed16_desc || "Отправьте 500 USVT на адрес Бога",
+        deed17_desc: translations[currentLang]?.deed17_desc || "Отправьте 200 USVT на адрес Бога",
+        deed18_desc: translations[currentLang]?.deed18_desc || "Отправьте 50 USVT на адрес Бога",
+        deed19_desc: translations[currentLang]?.deed19_desc || "Отправьте 500 USVT на адрес Бога",
+        deed20_desc: translations[currentLang]?.deed20_desc || "Отправьте 600 USVT на адрес Бога",
+        deed21_desc: translations[currentLang]?.deed21_desc || "Отправьте 30 USVT на адрес Бога",
+        deed22_desc: translations[currentLang]?.deed22_desc || "Отправьте 1 DEMON на адрес Бога",
+        deed23_desc: translations[currentLang]?.deed23_desc || "Отправьте 1 DEMON на адрес Бога",
+        deed24_desc: translations[currentLang]?.deed24_desc || "Отправьте 100 DEMON на адрес Бога",
+        deed25_desc: translations[currentLang]?.deed25_desc || "Отправьте 50 DEMON на адрес Бога",
+        deed26_desc: translations[currentLang]?.deed26_desc || "Отправьте 1 USVT на адрес Бога",
+        deed27_desc: translations[currentLang]?.deed27_desc || "Отправьте 3 USVT на адрес Бога",
+        deed28_desc: translations[currentLang]?.deed28_desc || "Отправьте 5 USVT на адрес Бога",
+        deed29_desc: translations[currentLang]?.deed29_desc || "Отправьте 2 USVT на адрес Бога",
+        deed30_desc: translations[currentLang]?.deed30_desc || "Отправьте 10 USVT на адрес Бога",
+        deed31_desc: translations[currentLang]?.deed31_desc || "Отправьте 1 USVT на адрес Бога",
+        deed32_desc: translations[currentLang]?.deed32_desc || "Отправьте 2 USVT на адрес Бога",
+        deed33_desc: translations[currentLang]?.deed33_desc || "Отправьте 7 USVT на адрес Бога",
+        deed34_desc: translations[currentLang]?.deed34_desc || "Отправьте 5 USVT на адрес Бога",
+        deed35_desc: translations[currentLang]?.deed35_desc || "Отправьте 3 USVT на адрес Бога",
+        deed36_desc: translations[currentLang]?.deed36_desc || "Отправьте 1 USVT на адрес Бога",
+        deed37_desc: translations[currentLang]?.deed37_desc || "Отправьте 10 USVT на адрес Бога",
+        deed38_desc: translations[currentLang]?.deed38_desc || "Отправьте 5 USVT на адрес Бога",
+        deed39_desc: translations[currentLang]?.deed39_desc || "Отправьте 3 USVT на адрес Бога",
+        deed40_desc: translations[currentLang]?.deed40_desc || "Отправьте 2 USVT на адрес Бога"
+    };
+    return descs[key] || key;
+}
+
 function renderActions() {
     const container = document.getElementById('actionsList');
-    container.innerHTML = actions.map(a => `<div class="glass p-4"><div class="font-bold text-lg">${a.name}</div><div class="text-sm opacity-80 my-2">${a.desc}</div><div class="text-xs text-gold-light">💰 ${translations[currentLang]?.price || 'Цена'}: ${a.amount} ${a.token}</div><button class="actionBtn mt-3 btn-primary w-full py-1 rounded-full text-sm" data-id="${a.id}">${translations[currentLang]?.select || 'Выбрать'}</button></div>`).join('');
-    document.querySelectorAll('.actionBtn').forEach(btn => { btn.onclick = () => { const id = parseInt(btn.dataset.id); currentAction = actions.find(a => a.id === id); document.getElementById('modalTitle').innerText = currentAction.name; document.getElementById('modalDesc').innerHTML = `<strong>📤 ${translations[currentLang]?.what_to_do || 'Что делать'}:</strong> ${currentAction.desc}<br><strong>💰 ${translations[currentLang]?.amount || 'Количество'}:</strong> ${currentAction.amount} ${currentAction.token}`; document.getElementById('modalAddress').innerHTML = `<strong>📤 ${translations[currentLang]?.send_to || 'Отправить на адрес'}:</strong><br>${currentAction.address}`; document.getElementById('txidInput').value = ''; document.getElementById('actionStatus').innerHTML = ''; document.getElementById('actionModal').style.display = 'flex'; }; });
+    container.innerHTML = actionsKeys.map(a => {
+        const name = getActionName(a.nameKey);
+        const desc = getActionDesc(a.descKey);
+        return `<div class="glass p-4"><div class="font-bold text-lg">${name}</div><div class="text-sm opacity-80 my-2">${desc}</div><div class="text-xs text-gold-light">💰 ${translations[currentLang]?.price || 'Цена'}: ${a.amount} ${a.token}</div><button class="actionBtn mt-3 btn-primary w-full py-1 rounded-full text-sm" data-id="${a.id}" data-address="${a.address}" data-name="${name}" data-desc="${desc}" data-amount="${a.amount}" data-token="${a.token}">${translations[currentLang]?.select || 'Выбрать'}</button></div>`;
+    }).join('');
+    
+    document.querySelectorAll('.actionBtn').forEach(btn => {
+        btn.onclick = () => {
+            currentAction = {
+                id: parseInt(btn.dataset.id),
+                name: btn.dataset.name,
+                desc: btn.dataset.desc,
+                address: btn.dataset.address,
+                amount: btn.dataset.amount,
+                token: btn.dataset.token
+            };
+            document.getElementById('modalTitle').innerText = currentAction.name;
+            document.getElementById('modalDesc').innerHTML = `<strong>📤 ${translations[currentLang]?.what_to_do || 'Что делать'}:</strong> ${currentAction.desc}<br><strong>💰 ${translations[currentLang]?.amount || 'Количество'}:</strong> ${currentAction.amount} ${currentAction.token}`;
+            document.getElementById('modalAddress').innerHTML = `<strong>📤 ${translations[currentLang]?.send_to || 'Отправить на адрес'}:</strong><br>${currentAction.address}`;
+            document.getElementById('txidInput').value = '';
+            document.getElementById('actionStatus').innerHTML = '';
+            document.getElementById('actionModal').style.display = 'flex';
+        };
+    });
 }
+
 document.getElementById('copyAddressBtn').onclick = () => { if (currentAction) { navigator.clipboard.writeText(currentAction.address); alert(translations[currentLang]?.copied || 'Адрес скопирован: ' + currentAction.address); } };
 document.getElementById('confirmActionBtn').onclick = async () => { const txid = document.getElementById('txidInput').value.trim(); if (!txid) { alert(translations[currentLang]?.need_txid || 'Введите TXID'); return; } if (!userWallet) { alert(translations[currentLang]?.need_wallet || 'Сначала сохраните ваш кошелёк на главной странице'); return; } document.getElementById('actionStatus').innerHTML = '⏳ Проверяем...'; try { const url = `https://public-api.solscan.io/transaction/${txid}`; const resp = await fetch(url); const data = await resp.json(); if (!data || !data.txId) throw new Error(translations[currentLang]?.tx_not_found || 'Транзакция не найдена'); const signer = data.signer?.[0] || data.accountKeys?.[0]; if (signer !== userWallet) throw new Error(translations[currentLang]?.not_your_tx || 'TXID не с вашего кошелька'); let completed = JSON.parse(localStorage.getItem('completedActions') || '[]'); completed.push({ actionId: currentAction.id, txid, date: new Date().toISOString() }); localStorage.setItem('completedActions', JSON.stringify(completed)); document.getElementById('actionStatus').innerHTML = '✅ ' + (translations[currentLang]?.deed_done || 'Дело засчитано!'); setTimeout(() => { document.getElementById('actionModal').style.display = 'none'; }, 1500); } catch (err) { document.getElementById('actionStatus').innerHTML = `❌ ${err.message}`; } };
 document.getElementById('closeModalBtn').onclick = () => { document.getElementById('actionModal').style.display = 'none'; };
