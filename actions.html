@@ -19,8 +19,8 @@
 </head>
 <body class="p-4">
 <div class="max-w-6xl mx-auto">
-    <div class="flex justify-between items-center mb-6"><h1 class="text-3xl font-bold">🙏 40 духовных дел</h1><a href="index.html" class="btn-secondary">← На главную</a></div>
-    <div class="glass text-center mb-6"><p class="italic">Нажмите на любое дело → откроется окно с адресом и инструкцией → отправьте токены → вставьте TXID → получите подтверждение</p></div>
+    <div class="flex justify-between items-center mb-6"><h1 class="text-3xl font-bold" data-i18n="actions_title">🙏 40 духовных дел</h1><a href="index.html" class="btn-secondary" data-i18n="back">← На главную</a></div>
+    <div class="glass text-center mb-6"><p class="italic" data-i18n="actions_desc">Нажмите на любое дело → откроется окно с адресом и инструкцией → отправьте токены → вставьте TXID → получите подтверждение</p></div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="actionsList"></div>
 </div>
 
@@ -29,12 +29,12 @@
         <h3 id="modalTitle" class="text-xl font-bold mb-2 text-gold-light"></h3>
         <p id="modalDesc" class="text-sm mb-3"></p>
         <div class="address-box" id="modalAddress"></div>
-        <div class="flex gap-2 mb-3"><button id="copyAddressBtn" class="copy-btn">📋 Копировать адрес</button></div>
-        <p class="text-xs opacity-70 mb-2">После отправки вставьте TXID:</p>
-        <input type="text" id="txidInput" class="w-full p-2 rounded bg-black/50 border border-gold/30 mb-2" placeholder="Вставьте TXID">
-        <button id="confirmActionBtn" class="btn-primary w-full py-2 rounded-full">✅ Подтвердить</button>
+        <div class="flex gap-2 mb-3"><button id="copyAddressBtn" class="copy-btn" data-i18n="copy_addr">📋 Копировать адрес</button></div>
+        <p class="text-xs opacity-70 mb-2" data-i18n="after_send">После отправки вставьте TXID:</p>
+        <input type="text" id="txidInput" class="w-full p-2 rounded bg-black/50 border border-gold/30 mb-2" data-i18n-placeholder="txid_placeholder">
+        <button id="confirmActionBtn" class="btn-primary w-full py-2 rounded-full" data-i18n="confirm_btn">✅ Подтвердить</button>
         <div id="actionStatus" class="text-xs mt-2 text-center"></div>
-        <button id="closeModalBtn" class="btn-secondary w-full mt-3 py-2 rounded-full">Закрыть</button>
+        <button id="closeModalBtn" class="btn-secondary w-full mt-3 py-2 rounded-full" data-i18n="close">Закрыть</button>
     </div>
 </div>
 
@@ -42,56 +42,56 @@
 const GOD_ADDRESS = "DpgFgCXatvnegBAHBkNpd2cbEiyFL8E9sY1o6mp4EGhe";
 const DEMON_ADDRESS = "NbKJV6mn8NxnbXVPmBX6vxcdriVf7Pozjkwb9QJKETu";
 const actions = [
-    { id:1, name:"🕯️ Обычная свеча", desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
-    { id:2, name:"✨ Вечная свеча", desc:"Отправьте 1 USVT + 1 DEMON на адрес Бога", address:GOD_ADDRESS, token:"USVT+DEMON", amount:"1+1" },
-    { id:3, name:"🏛️ Соборная свеча", desc:"Отправьте 10 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"10" },
-    { id:4, name:"📿 Именная молитва", desc:"Отправьте 5 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"5" },
-    { id:5, name:"📆 Сорокоуст (40 дней)", desc:"Отправьте 40 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"40" },
-    { id:6, name:"📅 Годовая свеча", desc:"Отправьте 365 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"365" },
-    { id:7, name:"⛪ Поминовение в храме", desc:"Отправьте 100 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"100" },
-    { id:8, name:"📖 Молитвенное правило", desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
-    { id:9, name:"🎨 Аватар святого", desc:"Отправьте 50 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"50" },
-    { id:10, name:"🖼️ Икона в галерее", desc:"Отправьте 100 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"100" },
-    { id:11, name:"🙏 Молебен онлайн", desc:"Отправьте 20 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"20" },
-    { id:12, name:"🤝 Пожертвование", desc:"Отправьте любую сумму USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"любая" },
-    { id:13, name:"🏅 Друг монастыря", desc:"Отправьте 50 USVT (месяц) на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"50/мес" },
-    { id:14, name:"🗳️ Создать голосование", desc:"Отправьте 100 BOG на адрес DEMON", address:DEMON_ADDRESS, token:"BOG", amount:"100" },
-    { id:15, name:"⚡ Усилить голос", desc:"Отправьте 1000 BOG на адрес DEMON", address:DEMON_ADDRESS, token:"BOG", amount:"1000" },
-    { id:16, name:"👑 Старейшина", desc:"Отправьте 500 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"500" },
-    { id:17, name:"📢 Реклама на сайте", desc:"Отправьте 200 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"200" },
-    { id:18, name:"🖼️ NFT-икона", desc:"Отправьте 50 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"50" },
-    { id:19, name:"🕊️ Фрагмент мощей", desc:"Отправьте 500 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"500" },
-    { id:20, name:"👥 12 апостолов", desc:"Отправьте 600 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"600" },
-    { id:21, name:"🎓 Сертификат паломника", desc:"Отправьте 30 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"30" },
-    { id:22, name:"💀 Осквернить свечу", desc:"Отправьте 1 DEMON на адрес Бога", address:GOD_ADDRESS, token:"DEMON", amount:"1" },
-    { id:23, name:"⚫ Чёрная свеча", desc:"Отправьте 1 DEMON на адрес Бога", address:GOD_ADDRESS, token:"DEMON", amount:"1" },
-    { id:24, name:"👿 Богохульник недели", desc:"Отправьте 100 DEMON на адрес Бога", address:GOD_ADDRESS, token:"DEMON", amount:"100" },
-    { id:25, name:"🗑️ Снять икону", desc:"Отправьте 50 DEMON на адрес Бога", address:GOD_ADDRESS, token:"DEMON", amount:"50" },
-    { id:26, name:"🙏 За любимого человека", desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
-    { id:27, name:"🕯️ За здоровье близкого", desc:"Отправьте 3 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"3" },
-    { id:28, name:"🍀 За удачу в делах", desc:"Отправьте 5 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"5" },
-    { id:29, name:"✈️ За путешествующих", desc:"Отправьте 2 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"2" },
-    { id:30, name:"🏠 За благополучие семьи", desc:"Отправьте 10 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"10" },
-    { id:31, name:"⚰️ За усопших", desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
-    { id:32, name:"💪 За здравие своё", desc:"Отправьте 2 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"2" },
-    { id:33, name:"🙌 За прощение грехов", desc:"Отправьте 7 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"7" },
-    { id:34, name:"⛪ За укрепление веры", desc:"Отправьте 5 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"5" },
-    { id:35, name:"😌 За избавление от уныния", desc:"Отправьте 3 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"3" },
-    { id:36, name:"🌍 За всех православных", desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
-    { id:37, name:"🕊️ За мир во всём мире", desc:"Отправьте 10 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"10" },
-    { id:38, name:"🤒 За болящих и страждущих", desc:"Отправьте 5 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"5" },
-    { id:39, name:"🛡️ За обиженных и угнетённых", desc:"Отправьте 3 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"3" },
-    { id:40, name:"🕯️ За всех усопших безродных", desc:"Отправьте 2 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"2" }
+    { id:1, name:"🕯️ "+(translations[currentLang]?.candle1||"Обычная свеча"), desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
+    { id:2, name:"✨ "+(translations[currentLang]?.candle2||"Вечная свеча"), desc:"Отправьте 1 USVT + 1 DEMON на адрес Бога", address:GOD_ADDRESS, token:"USVT+DEMON", amount:"1+1" },
+    { id:3, name:"🏛️ "+(translations[currentLang]?.candle3||"Соборная свеча"), desc:"Отправьте 10 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"10" },
+    { id:4, name:"📿 "+(translations[currentLang]?.prayer1||"Именная молитва"), desc:"Отправьте 5 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"5" },
+    { id:5, name:"📆 "+(translations[currentLang]?.sorokoust||"Сорокоуст (40 дней)"), desc:"Отправьте 40 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"40" },
+    { id:6, name:"📅 "+(translations[currentLang]?.year_candle||"Годовая свеча"), desc:"Отправьте 365 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"365" },
+    { id:7, name:"⛪ "+(translations[currentLang]?.church_memory||"Поминовение в храме"), desc:"Отправьте 100 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"100" },
+    { id:8, name:"📖 "+(translations[currentLang]?.prayer_rule||"Молитвенное правило"), desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
+    { id:9, name:"🎨 "+(translations[currentLang]?.avatar||"Аватар святого"), desc:"Отправьте 50 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"50" },
+    { id:10, name:"🖼️ "+(translations[currentLang]?.icon_gallery||"Икона в галерее"), desc:"Отправьте 100 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"100" },
+    { id:11, name:"🙏 "+(translations[currentLang]?.moleben||"Молебен онлайн"), desc:"Отправьте 20 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"20" },
+    { id:12, name:"🤝 "+(translations[currentLang]?.donation||"Пожертвование"), desc:"Отправьте любую сумму USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"любая" },
+    { id:13, name:"🏅 "+(translations[currentLang]?.friend_monastery||"Друг монастыря"), desc:"Отправьте 50 USVT (месяц) на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"50/мес" },
+    { id:14, name:"🗳️ "+(translations[currentLang]?.create_vote||"Создать голосование"), desc:"Отправьте 100 BOG на адрес DEMON", address:DEMON_ADDRESS, token:"BOG", amount:"100" },
+    { id:15, name:"⚡ "+(translations[currentLang]?.veto||"Усилить голос"), desc:"Отправьте 1000 BOG на адрес DEMON", address:DEMON_ADDRESS, token:"BOG", amount:"1000" },
+    { id:16, name:"👑 "+(translations[currentLang]?.elder||"Старейшина"), desc:"Отправьте 500 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"500" },
+    { id:17, name:"📢 "+(translations[currentLang]?.advert||"Реклама на сайте"), desc:"Отправьте 200 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"200" },
+    { id:18, name:"🖼️ "+(translations[currentLang]?.nft_icon||"NFT-икона"), desc:"Отправьте 50 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"50" },
+    { id:19, name:"🕊️ "+(translations[currentLang]?.relics||"Фрагмент мощей"), desc:"Отправьте 500 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"500" },
+    { id:20, name:"👥 "+(translations[currentLang]?.apostles||"12 апостолов"), desc:"Отправьте 600 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"600" },
+    { id:21, name:"🎓 "+(translations[currentLang]?.pilgrim_cert||"Сертификат паломника"), desc:"Отправьте 30 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"30" },
+    { id:22, name:"💀 "+(translations[currentLang]?.desecrate||"Осквернить свечу"), desc:"Отправьте 1 DEMON на адрес Бога", address:GOD_ADDRESS, token:"DEMON", amount:"1" },
+    { id:23, name:"⚫ "+(translations[currentLang]?.black_candle||"Чёрная свеча"), desc:"Отправьте 1 DEMON на адрес Бога", address:GOD_ADDRESS, token:"DEMON", amount:"1" },
+    { id:24, name:"👿 "+(translations[currentLang]?.blasphemer||"Богохульник недели"), desc:"Отправьте 100 DEMON на адрес Бога", address:GOD_ADDRESS, token:"DEMON", amount:"100" },
+    { id:25, name:"🗑️ "+(translations[currentLang]?.remove_icon||"Снять икону"), desc:"Отправьте 50 DEMON на адрес Бога", address:GOD_ADDRESS, token:"DEMON", amount:"50" },
+    { id:26, name:"🙏 "+(translations[currentLang]?.for_loved||"За любимого человека"), desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
+    { id:27, name:"🕯️ "+(translations[currentLang]?.for_health||"За здоровье близкого"), desc:"Отправьте 3 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"3" },
+    { id:28, name:"🍀 "+(translations[currentLang]?.for_luck||"За удачу в делах"), desc:"Отправьте 5 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"5" },
+    { id:29, name:"✈️ "+(translations[currentLang]?.for_travelers||"За путешествующих"), desc:"Отправьте 2 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"2" },
+    { id:30, name:"🏠 "+(translations[currentLang]?.for_family||"За благополучие семьи"), desc:"Отправьте 10 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"10" },
+    { id:31, name:"⚰️ "+(translations[currentLang]?.for_deceased||"За усопших"), desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
+    { id:32, name:"💪 "+(translations[currentLang]?.for_self_health||"За здравие своё"), desc:"Отправьте 2 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"2" },
+    { id:33, name:"🙌 "+(translations[currentLang]?.forgiveness||"За прощение грехов"), desc:"Отправьте 7 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"7" },
+    { id:34, name:"⛪ "+(translations[currentLang]?.strengthen_faith||"За укрепление веры"), desc:"Отправьте 5 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"5" },
+    { id:35, name:"😌 "+(translations[currentLang]?.despondency||"За избавление от уныния"), desc:"Отправьте 3 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"3" },
+    { id:36, name:"🌍 "+(translations[currentLang]?.for_all_orthodox||"За всех православных"), desc:"Отправьте 1 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"1" },
+    { id:37, name:"🕊️ "+(translations[currentLang]?.for_peace||"За мир во всём мире"), desc:"Отправьте 10 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"10" },
+    { id:38, name:"🤒 "+(translations[currentLang]?.for_sick||"За болящих и страждущих"), desc:"Отправьте 5 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"5" },
+    { id:39, name:"🛡️ "+(translations[currentLang]?.for_oppressed||"За обиженных и угнетённых"), desc:"Отправьте 3 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"3" },
+    { id:40, name:"🕯️ "+(translations[currentLang]?.for_forgotten||"За всех усопших безродных"), desc:"Отправьте 2 USVT на адрес Бога", address:GOD_ADDRESS, token:"USVT", amount:"2" }
 ];
 let currentAction = null;
 let userWallet = localStorage.getItem('userWallet') || '';
 function renderActions() {
     const container = document.getElementById('actionsList');
-    container.innerHTML = actions.map(a => `<div class="glass p-4"><div class="font-bold text-lg">${a.name}</div><div class="text-sm opacity-80 my-2">${a.desc}</div><div class="text-xs text-gold-light">💰 Цена: ${a.amount} ${a.token}</div><button class="actionBtn mt-3 btn-primary w-full py-1 rounded-full text-sm" data-id="${a.id}">Выбрать</button></div>`).join('');
-    document.querySelectorAll('.actionBtn').forEach(btn => { btn.onclick = () => { const id = parseInt(btn.dataset.id); currentAction = actions.find(a => a.id === id); document.getElementById('modalTitle').innerText = currentAction.name; document.getElementById('modalDesc').innerHTML = `<strong>📤 Что делать:</strong> ${currentAction.desc}<br><strong>💰 Количество:</strong> ${currentAction.amount} ${currentAction.token}`; document.getElementById('modalAddress').innerHTML = `<strong>📤 Отправить на адрес:</strong><br>${currentAction.address}`; document.getElementById('txidInput').value = ''; document.getElementById('actionStatus').innerHTML = ''; document.getElementById('actionModal').style.display = 'flex'; }; });
+    container.innerHTML = actions.map(a => `<div class="glass p-4"><div class="font-bold text-lg">${a.name}</div><div class="text-sm opacity-80 my-2">${a.desc}</div><div class="text-xs text-gold-light">💰 ${translations[currentLang]?.price || 'Цена'}: ${a.amount} ${a.token}</div><button class="actionBtn mt-3 btn-primary w-full py-1 rounded-full text-sm" data-id="${a.id}">${translations[currentLang]?.select || 'Выбрать'}</button></div>`).join('');
+    document.querySelectorAll('.actionBtn').forEach(btn => { btn.onclick = () => { const id = parseInt(btn.dataset.id); currentAction = actions.find(a => a.id === id); document.getElementById('modalTitle').innerText = currentAction.name; document.getElementById('modalDesc').innerHTML = `<strong>📤 ${translations[currentLang]?.what_to_do || 'Что делать'}:</strong> ${currentAction.desc}<br><strong>💰 ${translations[currentLang]?.amount || 'Количество'}:</strong> ${currentAction.amount} ${currentAction.token}`; document.getElementById('modalAddress').innerHTML = `<strong>📤 ${translations[currentLang]?.send_to || 'Отправить на адрес'}:</strong><br>${currentAction.address}`; document.getElementById('txidInput').value = ''; document.getElementById('actionStatus').innerHTML = ''; document.getElementById('actionModal').style.display = 'flex'; }; });
 }
-document.getElementById('copyAddressBtn').onclick = () => { if (currentAction) { navigator.clipboard.writeText(currentAction.address); alert('Адрес скопирован: ' + currentAction.address); } };
-document.getElementById('confirmActionBtn').onclick = async () => { const txid = document.getElementById('txidInput').value.trim(); if (!txid) { alert('Введите TXID'); return; } if (!userWallet) { alert('Сначала сохраните ваш кошелёк на главной странице'); return; } document.getElementById('actionStatus').innerHTML = '⏳ Проверяем...'; try { const url = `https://public-api.solscan.io/transaction/${txid}`; const resp = await fetch(url); const data = await resp.json(); if (!data || !data.txId) throw new Error('Транзакция не найдена'); const signer = data.signer?.[0] || data.accountKeys?.[0]; if (signer !== userWallet) throw new Error('TXID не с вашего кошелька'); let completed = JSON.parse(localStorage.getItem('completedActions') || '[]'); completed.push({ actionId: currentAction.id, txid, date: new Date().toISOString() }); localStorage.setItem('completedActions', JSON.stringify(completed)); document.getElementById('actionStatus').innerHTML = '✅ Дело засчитано!'; setTimeout(() => { document.getElementById('actionModal').style.display = 'none'; }, 1500); } catch (err) { document.getElementById('actionStatus').innerHTML = `❌ ${err.message}`; } };
+document.getElementById('copyAddressBtn').onclick = () => { if (currentAction) { navigator.clipboard.writeText(currentAction.address); alert(translations[currentLang]?.copied || 'Адрес скопирован: ' + currentAction.address); } };
+document.getElementById('confirmActionBtn').onclick = async () => { const txid = document.getElementById('txidInput').value.trim(); if (!txid) { alert(translations[currentLang]?.need_txid || 'Введите TXID'); return; } if (!userWallet) { alert(translations[currentLang]?.need_wallet || 'Сначала сохраните ваш кошелёк на главной странице'); return; } document.getElementById('actionStatus').innerHTML = '⏳ Проверяем...'; try { const url = `https://public-api.solscan.io/transaction/${txid}`; const resp = await fetch(url); const data = await resp.json(); if (!data || !data.txId) throw new Error(translations[currentLang]?.tx_not_found || 'Транзакция не найдена'); const signer = data.signer?.[0] || data.accountKeys?.[0]; if (signer !== userWallet) throw new Error(translations[currentLang]?.not_your_tx || 'TXID не с вашего кошелька'); let completed = JSON.parse(localStorage.getItem('completedActions') || '[]'); completed.push({ actionId: currentAction.id, txid, date: new Date().toISOString() }); localStorage.setItem('completedActions', JSON.stringify(completed)); document.getElementById('actionStatus').innerHTML = '✅ ' + (translations[currentLang]?.deed_done || 'Дело засчитано!'); setTimeout(() => { document.getElementById('actionModal').style.display = 'none'; }, 1500); } catch (err) { document.getElementById('actionStatus').innerHTML = `❌ ${err.message}`; } };
 document.getElementById('closeModalBtn').onclick = () => { document.getElementById('actionModal').style.display = 'none'; };
 window.onclick = (e) => { if (e.target === document.getElementById('actionModal')) document.getElementById('actionModal').style.display = 'none'; };
 renderActions();
