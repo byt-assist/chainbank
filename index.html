@@ -25,7 +25,6 @@
 <body class="p-4 md:p-6">
 <div class="max-w-7xl mx-auto">
 
-    <!-- Шапка -->
     <div class="flex flex-wrap justify-between items-center gap-3 mb-8 pb-4 border-b border-gold/30">
         <div class="flex items-center gap-3">
             <span class="text-3xl">⛪</span>
@@ -41,7 +40,6 @@
         </div>
     </div>
 
-    <!-- Меню -->
     <div class="flex flex-wrap gap-3 mb-8 justify-center">
         <a href="candles.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>🕯️</span> <span data-i18n="candles">Свечи</span></a>
         <a href="donate.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>💳</span> <span data-i18n="buy_tokens">Купить токены</span></a>
@@ -51,9 +49,10 @@
         <a href="saints.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>👼</span> <span data-i18n="saints">Святые</span></a>
         <a href="pilgrim.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>🚶</span> <span data-i18n="pilgrim">Паломник</span></a>
         <a href="parishes.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>⛪</span> <span data-i18n="parishes">Храмы</span></a>
+        <a href="actions.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>✨</span> <span>25 дел</span></a>
+        <a href="confession.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>🙏</span> <span>Исповедь</span></a>
     </div>
 
-    <!-- Календарь и трансляция -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div class="glass">
             <h2 class="text-xl font-bold mb-3" data-i18n="calendar">📅 Литургический календарь</h2>
@@ -68,13 +67,11 @@
         </div>
     </div>
 
-    <!-- Топ доноров -->
     <div class="glass">
         <h2 class="text-xl font-bold mb-3" data-i18n="top_donors">👑 Топ доноров (неделя)</h2>
         <div id="topDonors" class="space-y-2"></div>
     </div>
 
-    <!-- Данные пользователя -->
     <div class="glass">
         <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="text-gold text-2xl">✙</span> <span data-i18n="your_data">Ваши данные</span></h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -84,14 +81,12 @@
         <button id="saveDataBtn" class="btn-primary w-full md:w-auto mt-4 px-8 py-2 rounded-full text-sm"><span data-i18n="save">✙ Сохранить</span></button>
     </div>
 
-    <!-- Счётчики -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
         <div class="glass text-center border-l-4 border-gold"><div class="text-sm opacity-70">📿 <span data-i18n="forGod">За Бога</span></div><div class="text-3xl font-bold text-gold-light" id="forGodCount">0</div></div>
         <div class="glass text-center border-l-4 border-gold"><div class="text-sm opacity-70">💀 <span data-i18n="againstGod">Против Бога</span></div><div class="text-3xl font-bold text-red-400" id="againstGodCount">0</div></div>
         <div class="glass text-center border-l-4 border-gold"><div class="text-sm opacity-70">🕯️ <span data-i18n="candles_count">Свечей горит</span></div><div class="text-3xl font-bold text-amber-400" id="candlesCount">0</div></div>
     </div>
 
-    <!-- Токены -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <div class="glass token-card text-center">
             <img src="https://raw.githubusercontent.com/byt-assist/chainbank/refs/heads/main/bog_logo.png" class="w-24 h-24 mx-auto mb-3 rounded-full border-2 border-gold">
@@ -116,7 +111,6 @@
         </div>
     </div>
 
-    <!-- Форма подтверждения TXID -->
     <div class="glass" id="txidForm" style="display:none;">
         <h2 class="text-xl font-bold mb-3"><span data-i18n="verify_title">Подтверждение</span></h2>
         <p id="txActionDesc" class="text-sm mb-3"></p>
@@ -125,14 +119,12 @@
         <div id="verifyStatus" class="text-sm mt-3 text-center"></div>
     </div>
 
-    <!-- Прямые пожертвования -->
     <div class="glass text-center">
         <h2 class="text-xl font-bold mb-3" data-i18n="direct_donations">🤝 Прямые пожертвования (SOL/USDC)</h2>
         <div class="bg-black/50 p-3 rounded-xl font-mono text-sm break-all">GD7BH3LZ1JNyn5Nb5w4C4b2iR6FTW5dd6aN4vczwQdkD</div>
         <button id="copyWalletBtn" class="btn-primary mt-3 py-1 px-5 rounded-full text-sm"><span data-i18n="copy">📋 Копировать</span></button>
     </div>
 
-    <!-- SWIFT -->
     <div class="glass">
         <h2 class="text-xl font-bold mb-3" data-i18n="large_donations">🏦 Крупные пожертвования (SWIFT/SEPA)</h2>
         <p class="text-sm mb-3" data-i18n="large_desc">Для пожертвований от $1000. После перевода свяжитесь с нами:</p>
@@ -142,7 +134,6 @@
         </div>
     </div>
 
-    <!-- Рефералка -->
     <div class="glass">
         <h2 class="text-xl font-bold mb-3" data-i18n="refer">👥 Приведи друга</h2>
         <div class="flex gap-2">
@@ -154,106 +145,48 @@
 </div>
 
 <script>
-// Адреса токенов
-const ADDRESSES = {
-    BOG: "DpgFgCXatvnegBAHBkNpd2cbEiyFL8E9sY1o6mp4EGhe",
-    USVT: "ENC5G33K12GeKbXfqv5K645EF7xwjCtGvojfBW62zS9",
-    DEMON: "NbKJV6mn8NxnbXVPmBX6vxcdriVf7Pozjkwb9QJKETu"
-};
-
+const ADDRESSES = { BOG: "DpgFgCXatvnegBAHBkNpd2cbEiyFL8E9sY1o6mp4EGhe", USVT: "ENC5G33K12GeKbXfqv5K645EF7xwjCtGvojfBW62zS9", DEMON: "NbKJV6mn8NxnbXVPmBX6vxcdriVf7Pozjkwb9QJKETu" };
 let currentAction = null;
 let userWallet = localStorage.getItem('userWallet') || '';
 let userName = localStorage.getItem('userName') || '';
-
 document.getElementById('userWallet').value = userWallet;
 document.getElementById('userName').value = userName;
 
-// Функция обновления календаря (с переводами имён святых)
 function updateCalendar() {
-    // Православные святые на разных языках
-    const orthodoxSaints = {
-        en: {5: {20: "St. Patrick of Belynichi", 21: "St. Nicholas of Japan"}},
-        ru: {5: {20: "Св. Патрик Белыничский", 21: "Св. Николай Японский"}},
-        es: {5: {20: "San Patricio de Belynichi", 21: "San Nicolás de Japón"}},
-        zh: {5: {20: "别雷尼奇的圣帕特里克", 21: "日本的圣尼古拉"}},
-        fr: {5: {20: "Saint Patrick de Belynichi", 21: "Saint Nicolas du Japon"}},
-        de: {5: {20: "Hl. Patrick von Belynichi", 21: "Hl. Nikolaus von Japan"}},
-        it: {5: {20: "San Patrizio di Belynichi", 21: "San Nicola del Giappone"}},
-        ja: {5: {20: "ベリニチの聖パトリック", 21: "日本の聖ニコライ"}}
-    };
-    
-    const today = new Date();
-    const month = today.getMonth() + 1;
-    const day = today.getDate();
-    
+    const orthodoxSaints = { en: {5: {20: "St. Patrick of Belynichi", 21: "St. Nicholas of Japan"}}, ru: {5: {20: "Св. Патрик Белыничский", 21: "Св. Николай Японский"}}, es: {5: {20: "San Patricio de Belynichi", 21: "San Nicolás de Japón"}}, zh: {5: {20: "别雷尼奇的圣帕特里克", 21: "日本的圣尼古拉"}}, fr: {5: {20: "Saint Patrick de Belynichi", 21: "Saint Nicolas du Japon"}}, de: {5: {20: "Hl. Patrick von Belynichi", 21: "Hl. Nikolaus von Japan"}}, it: {5: {20: "San Patrizio di Belynichi", 21: "San Nicola del Giappone"}}, ja: {5: {20: "ベリニチの聖パトリック", 21: "日本の聖ニコライ"}} };
+    const today = new Date(); const month = today.getMonth() + 1; const day = today.getDate();
     const langSaints = orthodoxSaints[currentLang] || orthodoxSaints.en;
     let saint = (langSaints[month] && langSaints[month][day]) ? langSaints[month][day] : (translations[currentLang]?.ordinary_day || "Рядовой день");
-    
     const dateStr = today.toLocaleDateString(currentLang === 'ru' ? 'ru' : 'en', {month: 'long', day: 'numeric'});
     const lightCandleText = translations[currentLang]?.light_candle || "🕯️ Зажгите свечу в его честь";
-    
     document.getElementById('calendar').innerHTML = `<div class="text-center"><div class="text-gold-light text-lg">${dateStr}</div><div class="text-xl font-bold">${saint}</div><div class="text-sm opacity-70 mt-1">${lightCandleText}</div></div>`;
 }
 
-// Функция обновления топа доноров
 function updateTopDonors() {
     let candles = JSON.parse(localStorage.getItem('candles') || '[]');
     let donors = {};
-    candles.forEach(c => {
-        let name = c.name || c.wallet.slice(0, 8);
-        donors[name] = (donors[name] || 0) + 1;
-    });
-    let sorted = Object.entries(donors).sort((a, b) => b[1] - a[1]).slice(0, 5);
-    let topHtml = sorted.map(([name, count]) => `<div class="flex justify-between"><span>✝️ ${name}</span><span class="text-gold-light">${count} ${translations[currentLang]?.candles || 'свечей'}</span></div>`).join('');
+    candles.forEach(c => { let name = c.name || c.wallet.slice(0,8); donors[name] = (donors[name] || 0) + 1; });
+    let sorted = Object.entries(donors).sort((a,b)=>b[1]-a[1]).slice(0,5);
+    let topHtml = sorted.map(([name,count])=>`<div class="flex justify-between"><span>✝️ ${name}</span><span class="text-gold-light">${count} ${translations[currentLang]?.candles || 'свечей'}</span></div>`).join('');
     if (!topHtml) topHtml = `<div class="opacity-60">${translations[currentLang]?.no_donors || 'Пока никого. Станьте первым!'}</div>`;
     document.getElementById('topDonors').innerHTML = topHtml;
 }
 
-// Переопределяем setLanguage
 const originalSetLanguage = setLanguage;
-window.setLanguage = function(lang) {
-    originalSetLanguage(lang);
-    updateCalendar();
-    updateTopDonors();
-};
+window.setLanguage = function(lang) { originalSetLanguage(lang); updateCalendar(); updateTopDonors(); };
 setLanguage = window.setLanguage;
 
-// Сохранение данных
-document.getElementById('saveDataBtn').onclick = () => {
-    localStorage.setItem('userWallet', document.getElementById('userWallet').value);
-    localStorage.setItem('userName', document.getElementById('userName').value);
-    userWallet = document.getElementById('userWallet').value;
-    userName = document.getElementById('userName').value;
-    alert(translations[currentLang]?.saved_msg || 'Сохранено');
-};
+document.getElementById('saveDataBtn').onclick = () => { localStorage.setItem('userWallet', document.getElementById('userWallet').value); localStorage.setItem('userName', document.getElementById('userName').value); userWallet = document.getElementById('userWallet').value; userName = document.getElementById('userName').value; alert(translations[currentLang]?.saved_msg || 'Сохранено'); };
+document.getElementById('copyWalletBtn').onclick = () => { navigator.clipboard.writeText("GD7BH3LZ1JNyn5Nb5w4C4b2iR6FTW5dd6aN4vczwQdkD"); alert(translations[currentLang]?.copied_msg || 'Скопировано'); };
 
-document.getElementById('copyWalletBtn').onclick = () => {
-    navigator.clipboard.writeText("GD7BH3LZ1JNyn5Nb5w4C4b2iR6FTW5dd6aN4vczwQdkD");
-    alert(translations[currentLang]?.copied_msg || 'Скопировано');
-};
-
-function showTxidForm(action, desc) {
-    if (!userWallet) {
-        alert(translations[currentLang]?.need_wallet || 'Введите кошелёк');
-        return;
-    }
-    currentAction = action;
-    document.getElementById('txActionDesc').innerText = desc;
-    document.getElementById('txidForm').style.display = 'block';
-    document.getElementById('txidInput').value = '';
-    document.getElementById('verifyStatus').innerHTML = '';
-}
-
-document.getElementById('forGodBtn').onclick = () => showTxidForm('forGod', `${translations[currentLang]?.send_usvt_desc || 'Отправьте 1 USVT на адрес BOG'} (${ADDRESSES.BOG}). ${translations[currentLang]?.txid_placeholder || 'Вставьте TXID'}:`);
-document.getElementById('againstGodBtn').onclick = () => showTxidForm('againstGod', `${translations[currentLang]?.send_bog_desc || 'Отправьте 1 BOG на адрес DEMON'} (${ADDRESSES.DEMON}). ${translations[currentLang]?.txid_placeholder || 'Вставьте TXID'}:`);
-document.getElementById('eternalBtn').onclick = () => showTxidForm('eternal', `${translations[currentLang]?.send_eternal_desc || 'Отправьте 1 USVT + 1 DEMON на адрес BOG'} (${ADDRESSES.BOG}). ${translations[currentLang]?.txid_placeholder || 'Вставьте TXID'}:`);
+function showTxidForm(action, desc) { if (!userWallet) { alert(translations[currentLang]?.need_wallet || 'Введите кошелёк'); return; } currentAction = action; document.getElementById('txActionDesc').innerText = desc; document.getElementById('txidForm').style.display = 'block'; document.getElementById('txidInput').value = ''; document.getElementById('verifyStatus').innerHTML = ''; }
+document.getElementById('forGodBtn').onclick = () => showTxidForm('forGod', `Отправьте 1 USVT на адрес BOG (${ADDRESSES.BOG}). Вставьте TXID:`);
+document.getElementById('againstGodBtn').onclick = () => showTxidForm('againstGod', `Отправьте 1 BOG на адрес DEMON (${ADDRESSES.DEMON}). Вставьте TXID:`);
+document.getElementById('eternalBtn').onclick = () => showTxidForm('eternal', `Отправьте 1 USVT + 1 DEMON на адрес BOG (${ADDRESSES.BOG}). Вставьте TXID:`);
 
 document.getElementById('verifyBtn').onclick = async () => {
     const txid = document.getElementById('txidInput').value.trim();
-    if (!txid) {
-        alert(translations[currentLang]?.need_txid || 'Введите TXID');
-        return;
-    }
+    if (!txid) { alert(translations[currentLang]?.need_txid || 'Введите TXID'); return; }
     document.getElementById('verifyStatus').innerHTML = '⏳ Проверяем...';
     try {
         const url = `https://public-api.solscan.io/transaction/${txid}`;
@@ -262,51 +195,24 @@ document.getElementById('verifyBtn').onclick = async () => {
         if (!data || !data.txId) throw new Error('Транзакция не найдена');
         const signer = data.signer?.[0] || data.accountKeys?.[0];
         if (signer !== userWallet) throw new Error('TXID не с вашего кошелька');
-        
         let isValid = false;
-        if (currentAction === 'forGod') {
-            const transfer = data.tokenTransfers?.find(t => t.mint === ADDRESSES.USVT && t.to === ADDRESSES.BOG && parseInt(t.amount) >= 1e9);
-            if (transfer) isValid = true;
-        } else if (currentAction === 'againstGod') {
-            const transfer = data.tokenTransfers?.find(t => t.mint === ADDRESSES.BOG && t.to === ADDRESSES.DEMON && parseInt(t.amount) >= 1e9);
-            if (transfer) isValid = true;
-        } else if (currentAction === 'eternal') {
-            const usvtOk = data.tokenTransfers?.some(t => t.mint === ADDRESSES.USVT && t.to === ADDRESSES.BOG && parseInt(t.amount) >= 1e9);
-            const demonOk = data.tokenTransfers?.some(t => t.mint === ADDRESSES.DEMON && t.to === ADDRESSES.BOG && parseInt(t.amount) >= 1e9);
-            if (usvtOk && demonOk) isValid = true;
-        }
+        if (currentAction === 'forGod') { const transfer = data.tokenTransfers?.find(t => t.mint === ADDRESSES.USVT && t.to === ADDRESSES.BOG && parseInt(t.amount) >= 1e9); if (transfer) isValid = true; }
+        else if (currentAction === 'againstGod') { const transfer = data.tokenTransfers?.find(t => t.mint === ADDRESSES.BOG && t.to === ADDRESSES.DEMON && parseInt(t.amount) >= 1e9); if (transfer) isValid = true; }
+        else if (currentAction === 'eternal') { const usvtOk = data.tokenTransfers?.some(t => t.mint === ADDRESSES.USVT && t.to === ADDRESSES.BOG && parseInt(t.amount) >= 1e9); const demonOk = data.tokenTransfers?.some(t => t.mint === ADDRESSES.DEMON && t.to === ADDRESSES.BOG && parseInt(t.amount) >= 1e9); if (usvtOk && demonOk) isValid = true; }
         if (!isValid) throw new Error('Транзакция не соответствует действию');
-        
-        const now = new Date();
-        const expires = new Date(now.getTime() + 60 * 60 * 1000);
-        const candle = {
-            wallet: userWallet,
-            name: userName || userWallet.slice(0, 8),
-            action: currentAction,
-            timestamp: now.toISOString(),
-            expires: currentAction === 'eternal' ? null : expires.toISOString(),
-            txid: txid
-        };
+        const now = new Date(); const expires = new Date(now.getTime() + 60*60*1000);
+        const candle = { wallet: userWallet, name: userName || userWallet.slice(0,8), action: currentAction, timestamp: now.toISOString(), expires: currentAction === 'eternal' ? null : expires.toISOString(), txid: txid };
         let candles = JSON.parse(localStorage.getItem('candles') || '[]');
-        candles.push(candle);
-        localStorage.setItem('candles', JSON.stringify(candles));
-        document.getElementById('verifyStatus').innerHTML = '✅ Свеча зажжена!';
-        updateTopDonors();
-        updateCounters();
+        candles.push(candle); localStorage.setItem('candles', JSON.stringify(candles));
+        document.getElementById('verifyStatus').innerHTML = '✅ Свеча зажжена!'; updateTopDonors(); updateCounters();
         setTimeout(() => { window.location.href = 'candles.html'; }, 1500);
-    } catch (err) {
-        document.getElementById('verifyStatus').innerHTML = `❌ ${err.message}`;
-    }
+    } catch (err) { document.getElementById('verifyStatus').innerHTML = `❌ ${err.message}`; }
 };
 
 function updateCounters() {
     let candles = JSON.parse(localStorage.getItem('candles') || '[]');
     let now = new Date();
-    let active = candles.filter(c => {
-        if (c.action === 'eternal') return true;
-        if (c.expires && new Date(c.expires) > now) return true;
-        return false;
-    });
+    let active = candles.filter(c => { if (c.action === 'eternal') return true; if (c.expires && new Date(c.expires) > now) return true; return false; });
     document.getElementById('candlesCount').innerText = active.length;
     let forGod = candles.filter(c => c.action === 'forGod' || c.action === 'eternal').length;
     let againstGod = candles.filter(c => c.action === 'againstGod').length;
@@ -314,18 +220,9 @@ function updateCounters() {
     document.getElementById('againstGodCount').innerText = againstGod;
 }
 setInterval(updateCounters, 60000);
-updateCounters();
-
-updateCalendar();
-updateTopDonors();
-
-let refLink = document.getElementById('refLink');
-refLink.value = `${window.location.origin}?ref=${userWallet || 'guest'}`;
-document.getElementById('copyRefBtn').onclick = () => {
-    refLink.select();
-    document.execCommand('copy');
-    alert(translations[currentLang]?.copied_msg || 'Скопировано!');
-};
+updateCounters(); updateCalendar(); updateTopDonors();
+let refLink = document.getElementById('refLink'); refLink.value = `${window.location.origin}?ref=${userWallet || 'guest'}`;
+document.getElementById('copyRefBtn').onclick = () => { refLink.select(); document.execCommand('copy'); alert(translations[currentLang]?.copied_msg || 'Скопировано!'); };
 </script>
 </body>
 </html>
