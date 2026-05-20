@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chain Bank · Православные токены</title>
+    <title>Chain Bank · Orthodox</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="lang.js"></script>
     <style>
@@ -25,7 +25,7 @@
 <body class="p-4 md:p-6">
 <div class="max-w-7xl mx-auto">
 
-    <!-- Шапка с переключателем на католиков -->
+    <!-- Шапка -->
     <div class="flex flex-wrap justify-between items-center gap-3 mb-8 pb-4 border-b border-gold/30">
         <div class="flex items-center gap-3">
             <span class="text-3xl">⛪</span>
@@ -35,22 +35,22 @@
         </div>
         <div class="flex flex-wrap gap-2 items-center">
             <a href="https://byt-assist.github.io/catholic-chainbank/" class="btn-secondary px-3 py-1 rounded-full text-xs flex items-center gap-1">
-                <span>✝️</span> <span>Католическая ветка</span>
+                <span>✝️</span> <span data-i18n="catholic_link">Католическая ветка</span>
             </a>
             <div id="lang-switcher" class="flex flex-wrap gap-1"></div>
         </div>
     </div>
 
-    <!-- Меню навигации -->
+    <!-- Меню -->
     <div class="flex flex-wrap gap-3 mb-8 justify-center">
         <a href="candles.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>🕯️</span> <span data-i18n="candles">Свечи</span></a>
         <a href="donate.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>💳</span> <span data-i18n="buy_tokens">Купить токены</span></a>
         <a href="dao.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>🗳️</span> <span data-i18n="dao">DAO</span></a>
         <a href="memory.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>📖</span> <span data-i18n="memory">Память</span></a>
-        <a href="prayers.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>🙏</span> Молитвы</a>
-        <a href="saints.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>👼</span> Святые</a>
-        <a href="pilgrim.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>🚶</span> Паломник</a>
-        <a href="parishes.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>⛪</span> Храмы</a>
+        <a href="prayers.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>🙏</span> <span data-i18n="prayers">Молитвы</span></a>
+        <a href="saints.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>👼</span> <span data-i18n="saints">Святые</span></a>
+        <a href="pilgrim.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>🚶</span> <span data-i18n="pilgrim">Паломник</span></a>
+        <a href="parishes.html" class="btn-secondary px-4 py-2 rounded-full text-sm flex items-center gap-1"><span>⛪</span> <span data-i18n="parishes">Храмы</span></a>
     </div>
 
     <!-- Календарь и трансляция -->
@@ -60,11 +60,11 @@
             <div id="calendar"></div>
         </div>
         <div class="glass">
-            <h2 class="text-xl font-bold mb-3" data-i18n="live_mass">📺 Прямая трансляция</h2>
+            <h2 class="text-xl font-bold mb-3" data-i18n="live_title">📺 Прямая трансляция</h2>
             <div class="aspect-video">
                 <iframe src="https://open.ivideon.com/embed/v3/100-GsrtYvLbo3Q2hCwpSW3q0y:0/" class="w-full h-full rounded-xl" allow="autoplay; fullscreen; clipboard-write; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <p class="text-xs opacity-60 text-center mt-2">📡 Holy Trinity Church, Toronto — 24/7</p>
+            <p class="text-xs opacity-60 text-center mt-2" data-i18n="live_source">📡 Holy Trinity Church, Toronto — 24/7</p>
         </div>
     </div>
 
@@ -76,7 +76,7 @@
 
     <!-- Данные пользователя -->
     <div class="glass">
-        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="text-gold text-2xl">✙</span> <span data-i18n="yourWallet">Ваши данные</span></h2>
+        <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="text-gold text-2xl">✙</span> <span data-i18n="your_data">Ваши данные</span></h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input type="text" id="userWallet" class="w-full p-3 rounded-xl bg-black/50 border border-gold/30 text-white" data-i18n-placeholder="wallet_placeholder">
             <input type="text" id="userName" class="w-full p-3 rounded-xl bg-black/50 border border-gold/30 text-white" data-i18n-placeholder="name_placeholder">
@@ -105,7 +105,7 @@
             <h2 class="text-2xl font-bold">USVT</h2>
             <div class="text-sm opacity-70 mb-2">Universal Saint Verified</div>
             <div class="text-2xl font-bold mt-2 text-gold-light">$1.00</div>
-            <button id="eternalBtn" class="btn-primary w-full py-2 rounded-full text-sm mt-3"><span data-i18n="eternal_btn">✨ Вечная свеча</span></button>
+            <button id="eternalBtn" class="btn-primary w-full py-2 rounded-full text-sm mt-3"><span data-i18n="eternal_candle">✨ Вечная свеча</span></button>
         </div>
         <div class="glass token-card text-center">
             <img src="https://raw.githubusercontent.com/byt-assist/chainbank/refs/heads/main/demon_logo.png" class="w-24 h-24 mx-auto mb-3 rounded-full border-2 border-gold">
@@ -118,7 +118,7 @@
 
     <!-- Форма подтверждения TXID -->
     <div class="glass" id="txidForm" style="display:none;">
-        <h2 class="text-xl font-bold mb-3">🔍 Подтверждение</h2>
+        <h2 class="text-xl font-bold mb-3"><span data-i18n="verify_title">Подтверждение</span></h2>
         <p id="txActionDesc" class="text-sm mb-3"></p>
         <input type="text" id="txidInput" class="w-full p-3 rounded-xl bg-black/50 border border-gold/30 mb-3" data-i18n-placeholder="txid_placeholder">
         <button id="verifyBtn" class="btn-primary w-full py-2 rounded-full"><span data-i18n="verify_btn">✙ Проверить</span></button>
@@ -127,15 +127,15 @@
 
     <!-- Прямые пожертвования -->
     <div class="glass text-center">
-        <h2 class="text-xl font-bold mb-3">🤝 Прямые пожертвования (SOL/USDC)</h2>
+        <h2 class="text-xl font-bold mb-3" data-i18n="direct_donations">🤝 Прямые пожертвования (SOL/USDC)</h2>
         <div class="bg-black/50 p-3 rounded-xl font-mono text-sm break-all">GD7BH3LZ1JNyn5Nb5w4C4b2iR6FTW5dd6aN4vczwQdkD</div>
-        <button id="copyWalletBtn" class="btn-primary mt-3 py-1 px-5 rounded-full text-sm">📋 Копировать</button>
+        <button id="copyWalletBtn" class="btn-primary mt-3 py-1 px-5 rounded-full text-sm"><span data-i18n="copy">📋 Копировать</span></button>
     </div>
 
     <!-- SWIFT -->
     <div class="glass">
-        <h2 class="text-xl font-bold mb-3">🏦 Крупные пожертвования (SWIFT/SEPA)</h2>
-        <p class="text-sm mb-3">Для пожертвований от $1000. После перевода свяжитесь с нами:</p>
+        <h2 class="text-xl font-bold mb-3" data-i18n="large_donations">🏦 Крупные пожертвования (SWIFT/SEPA)</h2>
+        <p class="text-sm mb-3" data-i18n="large_desc">Для пожертвований от $1000. После перевода свяжитесь с нами:</p>
         <div class="flex flex-wrap gap-4">
             <a href="mailto:donatedeus@gmail.com" class="text-gold-light underline">📧 donatedeus@gmail.com</a>
             <a href="https://t.me/BOYMAT_token_BYT" class="text-gold-light underline">💬 Telegram</a>
@@ -144,10 +144,10 @@
 
     <!-- Рефералка -->
     <div class="glass">
-        <h2 class="text-xl font-bold mb-3">👥 Приведи друга</h2>
+        <h2 class="text-xl font-bold mb-3" data-i18n="refer">👥 Приведи друга</h2>
         <div class="flex gap-2">
             <input type="text" id="refLink" readonly class="w-full p-2 rounded-xl bg-black/50 border border-gold/30">
-            <button id="copyRefBtn" class="btn-primary px-4 py-2 rounded-full">📋 Копировать</button>
+            <button id="copyRefBtn" class="btn-primary px-4 py-2 rounded-full"><span data-i18n="copy">📋 Копировать</span></button>
         </div>
     </div>
 
@@ -174,13 +174,13 @@ document.getElementById('saveDataBtn').onclick = () => {
     localStorage.setItem('userName', document.getElementById('userName').value);
     userWallet = document.getElementById('userWallet').value;
     userName = document.getElementById('userName').value;
-    alert(translations[currentLang]?.saved || 'Сохранено');
+    alert(translations[currentLang]?.saved_msg || 'Сохранено');
 };
 
 // Копирование кошелька
 document.getElementById('copyWalletBtn').onclick = () => {
     navigator.clipboard.writeText("GD7BH3LZ1JNyn5Nb5w4C4b2iR6FTW5dd6aN4vczwQdkD");
-    alert(translations[currentLang]?.copied || 'Скопировано');
+    alert(translations[currentLang]?.copied_msg || 'Скопировано');
 };
 
 // Показать форму ввода TXID
@@ -196,9 +196,9 @@ function showTxidForm(action, desc) {
     document.getElementById('verifyStatus').innerHTML = '';
 }
 
-document.getElementById('forGodBtn').onclick = () => showTxidForm('forGod', `Отправьте 1 USVT на адрес BOG (${ADDRESSES.BOG}). Вставьте TXID:`);
-document.getElementById('againstGodBtn').onclick = () => showTxidForm('againstGod', `Отправьте 1 BOG на адрес DEMON (${ADDRESSES.DEMON}). Вставьте TXID:`);
-document.getElementById('eternalBtn').onclick = () => showTxidForm('eternal', `Отправьте 1 USVT + 1 DEMON на адрес BOG (${ADDRESSES.BOG}). Вставьте TXID:`);
+document.getElementById('forGodBtn').onclick = () => showTxidForm('forGod', translations[currentLang]?.send_usvt_desc || `Отправьте 1 USVT на адрес BOG (${ADDRESSES.BOG}). Вставьте TXID:`);
+document.getElementById('againstGodBtn').onclick = () => showTxidForm('againstGod', translations[currentLang]?.send_bog_desc || `Отправьте 1 BOG на адрес DEMON (${ADDRESSES.DEMON}). Вставьте TXID:`);
+document.getElementById('eternalBtn').onclick = () => showTxidForm('eternal', translations[currentLang]?.send_eternal_desc || `Отправьте 1 USVT + 1 DEMON на адрес BOG (${ADDRESSES.BOG}). Вставьте TXID:`);
 
 // Проверка TXID через Solscan
 document.getElementById('verifyBtn').onclick = async () => {
@@ -270,12 +270,12 @@ setInterval(updateCounters, 60000);
 updateCounters();
 
 // Календарь
-const orthodoxSaints = {5: {19: "Св. Патрик Белыничский"}, 6: {1: "Св. Иустин Попович", 2: "Св. Иоанн Шанхайский", 3: "Св. Константин"}};
+const orthodoxSaints = {5: {20: "Св. Патрик Белыничский"}, 6: {1: "Св. Иустин Попович", 2: "Св. Иоанн Шанхайский", 3: "Св. Константин"}};
 const today = new Date();
 const month = today.getMonth() + 1;
 const day = today.getDate();
-let saint = (orthodoxSaints[month] && orthodoxSaints[month][day]) ? orthodoxSaints[month][day] : "Рядовой день";
-document.getElementById('calendar').innerHTML = `<div class="text-center"><div class="text-gold-light text-lg">${today.toLocaleDateString('ru', {month: 'long', day: 'numeric'})}</div><div class="text-xl font-bold">${saint}</div><div class="text-sm opacity-70 mt-1">🕯️ Зажгите свечу в его честь</div></div>`;
+let saint = (orthodoxSaints[month] && orthodoxSaints[month][day]) ? orthodoxSaints[month][day] : (translations[currentLang]?.ordinary_day || "Рядовой день");
+document.getElementById('calendar').innerHTML = `<div class="text-center"><div class="text-gold-light text-lg">${today.toLocaleDateString(currentLang === 'ru' ? 'ru' : 'en', {month: 'long', day: 'numeric'})}</div><div class="text-xl font-bold">${saint}</div><div class="text-sm opacity-70 mt-1"><span data-i18n="light_candle">🕯️ Зажгите свечу в его честь</span></div></div>`;
 
 // Топ доноров
 let candles = JSON.parse(localStorage.getItem('candles') || '[]');
@@ -285,8 +285,8 @@ candles.forEach(c => {
     donors[name] = (donors[name] || 0) + 1;
 });
 let sorted = Object.entries(donors).sort((a, b) => b[1] - a[1]).slice(0, 5);
-let topHtml = sorted.map(([name, count]) => `<div class="flex justify-between"><span>✝️ ${name}</span><span class="text-gold-light">${count} свечей</span></div>`).join('');
-if (!topHtml) topHtml = '<div class="opacity-60">Пока никого. Станьте первым!</div>';
+let topHtml = sorted.map(([name, count]) => `<div class="flex justify-between"><span>✝️ ${name}</span><span class="text-gold-light">${count} candles</span></div>`).join('');
+if (!topHtml) topHtml = `<div class="opacity-60" data-i18n="no_donors">${translations[currentLang]?.no_donors || 'Пока никого. Станьте первым!'}</div>`;
 document.getElementById('topDonors').innerHTML = topHtml;
 
 // Реферальная ссылка
@@ -295,7 +295,7 @@ refLink.value = `${window.location.origin}?ref=${userWallet || 'guest'}`;
 document.getElementById('copyRefBtn').onclick = () => {
     refLink.select();
     document.execCommand('copy');
-    alert(translations[currentLang]?.copied || 'Скопировано!');
+    alert(translations[currentLang]?.copied_msg || 'Скопировано!');
 };
 </script>
 </body>
