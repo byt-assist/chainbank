@@ -88,7 +88,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
         <div class="glass text-center border-l-4 border-gold"><div class="text-sm opacity-70">📿 <span data-i18n="forGod">За Бога</span></div><div class="text-3xl font-bold text-gold-light" id="forGodCount">0</div></div>
         <div class="glass text-center border-l-4 border-gold"><div class="text-sm opacity-70">💀 <span data-i18n="againstGod">Против Бога</span></div><div class="text-3xl font-bold text-red-400" id="againstGodCount">0</div></div>
-        <div class="glass text-center border-l-4 border-gold"><div class="text-sm opacity-70">🕯️ <span data-i18n="candles">Свечей горит</span></div><div class="text-3xl font-bold text-amber-400" id="candlesCount">0</div></div>
+        <div class="glass text-center border-l-4 border-gold"><div class="text-sm opacity-70">🕯️ <span data-i18n="candles_count">Свечей горит</span></div><div class="text-3xl font-bold text-amber-400" id="candlesCount">0</div></div>
     </div>
 
     <!-- Токены -->
@@ -168,6 +168,41 @@ let userName = localStorage.getItem('userName') || '';
 document.getElementById('userWallet').value = userWallet;
 document.getElementById('userName').value = userName;
 
+// Функция обновления календаря (переводится при смене языка)
+function updateCalendar() {
+    const orthodoxSaints = {5: {20: "Св. Патрик Белыничский"}, 6: {1: "Св. Иустин Попович", 2: "Св. Иоанн Шанхайский", 3: "Св. Константин"}};
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    let saint = (orthodoxSaints[month] && orthodoxSaints[month][day]) ? orthodoxSaints[month][day] : (translations[currentLang]?.ordinary_day || "Рядовой день");
+    const dateStr = today.toLocaleDateString(currentLang === 'ru' ? 'ru' : 'en', {month: 'long', day: 'numeric'});
+    const lightCandleText = translations[currentLang]?.light_candle || "🕯️ Зажгите свечу в его честь";
+    document.getElementById('calendar').innerHTML = `<div class="text-center"><div class="text-gold-light text-lg">${dateStr}</div><div class="text-xl font-bold">${saint}</div><div class="text-sm opacity-70 mt-1">${lightCandleText}</div></div>`;
+}
+
+// Функция обновления топа доноров
+function updateTopDonors() {
+    let candles = JSON.parse(localStorage.getItem('candles') || '[]');
+    let donors = {};
+    candles.forEach(c => {
+        let name = c.name || c.wallet.slice(0, 8);
+        donors[name] = (donors[name] || 0) + 1;
+    });
+    let sorted = Object.entries(donors).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    let topHtml = sorted.map(([name, count]) => `<div class="flex justify-between"><span>✝️ ${name}</span><span class="text-gold-light">${count} ${translations[currentLang]?.candles || 'свечей'}</span></div>`).join('');
+    if (!topHtml) topHtml = `<div class="opacity-60">${translations[currentLang]?.no_donors || 'Пока никого. Станьте первым!'}</div>`;
+    document.getElementById('topDonors').innerHTML = topHtml;
+}
+
+// Переопределяем setLanguage, чтобы обновлять календарь и топ доноров
+const originalSetLanguage = setLanguage;
+window.setLanguage = function(lang) {
+    originalSetLanguage(lang);
+    updateCalendar();
+    updateTopDonors();
+};
+setLanguage = window.setLanguage;
+
 // Сохранение данных пользователя
 document.getElementById('saveDataBtn').onclick = () => {
     localStorage.setItem('userWallet', document.getElementById('userWallet').value);
@@ -196,9 +231,9 @@ function showTxidForm(action, desc) {
     document.getElementById('verifyStatus').innerHTML = '';
 }
 
-document.getElementById('forGodBtn').onclick = () => showTxidForm('forGod', translations[currentLang]?.send_usvt_desc || `Отправьте 1 USVT на адрес BOG (${ADDRESSES.BOG}). Вставьте TXID:`);
-document.getElementById('againstGodBtn').onclick = () => showTxidForm('againstGod', translations[currentLang]?.send_bog_desc || `Отправьте 1 BOG на адрес DEMON (${ADDRESSES.DEMON}). Вставьте TXID:`);
-document.getElementById('eternalBtn').onclick = () => showTxidForm('eternal', translations[currentLang]?.send_eternal_desc || `Отправьте 1 USVT + 1 DEMON на адрес BOG (${ADDRESSES.BOG}). Вставьте TXID:`);
+document.getElementById('forGodBtn').onclick = () => showTxidForm('forGod', `${translations[currentLang]?.send_usvt_desc || 'Отправьте 1 USVT на адрес BOG'} (${ADDRESSES.BOG}). ${translations[currentLang]?.txid_placeholder || 'Вставьте TXID'}:`);
+document.getElementById('againstGodBtn').onclick = () => showTxidForm('againstGod', `${translations[currentLang]?.send_bog_desc || 'Отправьте 1 BOG на адрес DEMON'} (${ADDRESSES.DEMON}). ${translations[currentLang]?.txid_placeholder || 'Вставьте TXID'}:`);
+document.getElementById('eternalBtn').onclick = () => showTxidForm('eternal', `${translations[currentLang]?.send_eternal_desc || 'Отправьте 1 USVT + 1 DEMON на адрес BOG'} (${ADDRESSES.BOG}). ${translations[currentLang]?.txid_placeholder || 'Вставьте TXID'}:`);
 
 // Проверка TXID через Solscan
 document.getElementById('verifyBtn').onclick = async () => {
@@ -230,7 +265,6 @@ document.getElementById('verifyBtn').onclick = async () => {
         }
         if (!isValid) throw new Error('Транзакция не соответствует действию');
         
-        // Сохраняем свечу
         const now = new Date();
         const expires = new Date(now.getTime() + 60 * 60 * 1000);
         const candle = {
@@ -245,13 +279,14 @@ document.getElementById('verifyBtn').onclick = async () => {
         candles.push(candle);
         localStorage.setItem('candles', JSON.stringify(candles));
         document.getElementById('verifyStatus').innerHTML = '✅ Свеча зажжена!';
+        updateTopDonors();
+        updateCounters();
         setTimeout(() => { window.location.href = 'candles.html'; }, 1500);
     } catch (err) {
         document.getElementById('verifyStatus').innerHTML = `❌ ${err.message}`;
     }
 };
 
-// Обновление счётчиков
 function updateCounters() {
     let candles = JSON.parse(localStorage.getItem('candles') || '[]');
     let now = new Date();
@@ -269,25 +304,9 @@ function updateCounters() {
 setInterval(updateCounters, 60000);
 updateCounters();
 
-// Календарь
-const orthodoxSaints = {5: {20: "Св. Патрик Белыничский"}, 6: {1: "Св. Иустин Попович", 2: "Св. Иоанн Шанхайский", 3: "Св. Константин"}};
-const today = new Date();
-const month = today.getMonth() + 1;
-const day = today.getDate();
-let saint = (orthodoxSaints[month] && orthodoxSaints[month][day]) ? orthodoxSaints[month][day] : (translations[currentLang]?.ordinary_day || "Рядовой день");
-document.getElementById('calendar').innerHTML = `<div class="text-center"><div class="text-gold-light text-lg">${today.toLocaleDateString(currentLang === 'ru' ? 'ru' : 'en', {month: 'long', day: 'numeric'})}</div><div class="text-xl font-bold">${saint}</div><div class="text-sm opacity-70 mt-1"><span data-i18n="light_candle">🕯️ Зажгите свечу в его честь</span></div></div>`;
-
-// Топ доноров
-let candles = JSON.parse(localStorage.getItem('candles') || '[]');
-let donors = {};
-candles.forEach(c => {
-    let name = c.name || c.wallet.slice(0, 8);
-    donors[name] = (donors[name] || 0) + 1;
-});
-let sorted = Object.entries(donors).sort((a, b) => b[1] - a[1]).slice(0, 5);
-let topHtml = sorted.map(([name, count]) => `<div class="flex justify-between"><span>✝️ ${name}</span><span class="text-gold-light">${count} candles</span></div>`).join('');
-if (!topHtml) topHtml = `<div class="opacity-60" data-i18n="no_donors">${translations[currentLang]?.no_donors || 'Пока никого. Станьте первым!'}</div>`;
-document.getElementById('topDonors').innerHTML = topHtml;
+// Инициализация календаря и топа доноров
+updateCalendar();
+updateTopDonors();
 
 // Реферальная ссылка
 let refLink = document.getElementById('refLink');
