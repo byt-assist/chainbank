@@ -55,12 +55,22 @@
             <div id="calendar"></div>
         </div>
         <div class="glass">
-            <h2 class="text-xl font-bold mb-3" data-i18n="live_mass">📺 Прямая трансляция</h2>
+            <h2 class="text-xl font-bold mb-3" data-i18n="live_mass">📺 Прямая трансляция из храма</h2>
             <div class="aspect-video">
-                <iframe src="https://www.youtube.com/embed/live_stream?channel=UCjqHFNfeFA9iCkC7dnN1WnQ" class="w-full h-full rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://open.ivideon.com/embed/v3/100-GsrtYvLbo3Q2hCwpSW3q0y:0/" 
+                        class="w-full h-full rounded-xl" 
+                        allow="autoplay; fullscreen; clipboard-write; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
             </div>
-            <p class="text-xs opacity-60 text-center mt-2">📡 Holy Trinity Church, Toronto — 24/7</p>
+            <p class="text-xs opacity-60 text-center mt-2">📡 Круглосуточная трансляция</p>
         </div>
+    </div>
+
+    <!-- Топ доноров -->
+    <div class="glass">
+        <h2 class="text-xl font-bold mb-3" data-i18n="top_donors">👑 Топ доноров (неделя)</h2>
+        <div id="topDonors" class="space-y-2"></div>
     </div>
 
     <!-- Данные пользователя -->
