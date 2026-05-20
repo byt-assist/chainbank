@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whitepaper · Chain Bank</title>
+    <title>Whitepaper · Chain Bank (Orthodox)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="lang.js"></script>
     <style>
@@ -12,101 +12,93 @@
         .btn-secondary{background:rgba(197,160,89,0.15);border:1px solid rgba(197,160,89,0.4);padding:0.5rem 1.2rem;border-radius:40px;display:inline-block;cursor:pointer;}
         h1{font-family:'Cormorant Garamond',serif; color:#FFDF85;}
         h2{font-family:'Cormorant Garamond',serif; color:#FFDF85; margin-top:1.5rem; margin-bottom:0.75rem;}
+        h3{font-family:'Cormorant Garamond',serif; color:#FFDF85; margin-top:1rem; margin-bottom:0.5rem; font-size:1.25rem;}
         hr{border-color:rgba(197,160,89,0.3); margin:1.5rem 0;}
+        table{width:100%; border-collapse:collapse; margin:1rem 0;}
+        th,td{border:1px solid rgba(197,160,89,0.3); padding:0.5rem; text-align:left;}
+        th{background:rgba(197,160,89,0.2);}
+        code{background:rgba(0,0,0,0.5); padding:0.2rem 0.4rem; border-radius:0.5rem; font-size:0.8rem; word-break:break-all;}
     </style>
 </head>
 <body class="p-4 md:p-6">
 <div class="max-w-4xl mx-auto">
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl md:text-4xl font-bold">📄 Whitepaper</h1>
-        <a href="index.html" class="btn-secondary">← Back to Home</a>
+        <h1 class="text-3xl md:text-4xl font-bold">📄 Whitepaper · Orthodox Branch</h1>
+        <a href="index.html" class="btn-secondary" data-i18n="back">← На главную</a>
     </div>
 
     <div class="glass">
         <h2>1. Mission & Vision</h2>
-        <p>Chain Bank bridges ancient faith traditions with modern blockchain technology. We provide a transparent, secure, and decentralized platform for spiritual acts: candles, prayers, donations, confession, and charity. Our mission is to make faith accessible to the digital generation while maintaining full respect for religious traditions.</p>
+        <p>Chain Bank (Orthodox Branch) bridges ancient Orthodox Christian traditions with modern blockchain technology. We provide a transparent, secure, and decentralized platform for spiritual acts: candles, prayers, donations, confession, and charity. Our mission is to make faith accessible to the digital generation while maintaining full respect for Orthodox traditions.</p>
 
-        <h2>2. Ecosystem Overview</h2>
-        <p>Chain Bank consists of two branches:</p>
-        <ul class="list-disc pl-6 mt-2 space-y-1">
-            <li><strong>Orthodox Branch</strong> – for Eastern Orthodox Christians (tokens: BOG, USVT, DEMON)</li>
-            <li><strong>Catholic Branch</strong> – for Roman Catholics (tokens: VBDT, VBST, VBDC)</li>
+        <h2>2. Technology Stack</h2>
+        <ul class="list-disc pl-6 space-y-1">
+            <li><strong>Blockchain:</strong> Solana (Mainnet)</li>
+            <li><strong>Token Standard:</strong> Token-2022</li>
+            <li><strong>Smart Contracts:</strong> Verified on Solscan</li>
+            <li><strong>Frontend:</strong> HTML/CSS/JS, hosted on GitHub Pages</li>
+            <li><strong>Transaction Verification:</strong> Solscan Public API</li>
         </ul>
-        <p class="mt-2">Each branch operates independently but shares the same technological foundation — Solana blockchain with Token-2022 standard.</p>
 
         <h2>3. Tokens</h2>
-        <h3>3.1 Orthodox Tokens (Chain Bank)</h3>
         <div class="overflow-x-auto">
-            <table class="w-full text-sm border border-gold/30">
-                <thead><tr class="bg-gold/20"><th class="p-2 border">Token</th><th class="p-2 border">Full Name</th><th class="p-2 border">Mint Address</th><th class="p-2 border">Role</th></tr></thead>
+            <table>
+                <thead><tr><th>Token</th><th>Full Name</th><th>Mint Address</th><th>Role</th></tr></thead>
                 <tbody>
-                    <tr><td class="p-2 border">BOG</td><td class="p-2 border">Bank Orthodox God</td><td class="p-2 border font-mono text-xs">DpgFgCXatvnegBAHBkNpd2cbEiyFL8E9sY1o6mp4EGhe</td><td class="p-2 border">Governance, status</td></tr>
-                    <tr><td class="p-2 border">USVT</td><td class="p-2 border">Universal Saint Verified</td><td class="p-2 border font-mono text-xs">ENC5G33K12GeKbXfqv5K645EF7xwjCtGvojfBW62zS9</td><td class="p-2 border">Charity, candles, prayers</td></tr>
-                    <tr><td class="p-2 border">DEMON</td><td class="p-2 border">Bank Orthodox Demon</td><td class="p-2 border font-mono text-xs">NbKJV6mn8NxnbXVPmBX6vxcdriVf7Pozjkwb9QJKETu</td><td class="p-2 border">Temptation, against God actions</td></tr>
+                    <tr><td><strong>BOG</strong></td><td>Bank Orthodox God Token</td><td><code>DpgFgCXatvnegBAHBkNpd2cbEiyFL8E9sY1o6mp4EGhe</code></td><td>Governance, status</td></tr>
+                    <tr><td><strong>USVT</strong></td><td>Universal Saint Verified Token</td><td><code>ENC5G33K12GeKbXfqv5K645EF7xwjCtGvojfBW62zS9</code></td><td>Charity, candles, prayers</td></tr>
+                    <tr><td><strong>DEMON</strong></td><td>Bank Orthodox Demon Token</td><td><code>NbKJV6mn8NxnbXVPmBX6vxcdriVf7Pozjkwb9QJKETu</code></td><td>Temptation, against God actions</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <h3>3.2 Catholic Tokens (Vatican Bank)</h3>
-        <div class="overflow-x-auto">
-            <table class="w-full text-sm border border-gold/30">
-                <thead><tr class="bg-gold/20"><th class="p-2 border">Token</th><th class="p-2 border">Full Name</th><th class="p-2 border">Mint Address</th><th class="p-2 border">Role</th></tr></thead>
-                <tbody>
-                    <tr><td class="p-2 border">VBDT</td><td class="p-2 border">Vatican Bank Deus Token</td><td class="p-2 border font-mono text-xs">AXhysCBFq7JAoBxU7osLTj6wq9VjJxESiv5Z759ZfBmZ</td><td class="p-2 border">Governance, status</td></tr>
-                    <tr><td class="p-2 border">VBST</td><td class="p-2 border">Vatican Bank Sanctus Token</td><td class="p-2 border font-mono text-xs">8mse7Sm7xy1pfp6cP8LdZ1oh2RsdGAZajuEENDd2tbbk</td><td class="p-2 border">Charity, candles, prayers</td></tr>
-                    <tr><td class="p-2 border">VBDC</td><td class="p-2 border">Vatican Bank Diabolus Coin</td><td class="p-2 border font-mono text-xs">2zaWrMgqduTVfVRbnzPxuk4Sd9v5ifAsfVeSCkPgYYXj</td><td class="p-2 border">Temptation, against God actions</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h2>4. Core Mechanics</h2>
-        <ul class="list-disc pl-6 space-y-1">
-            <li><strong>For God:</strong> Send USVT/VBST to God's address → light a candle (1 hour)</li>
-            <li><strong>Against God:</strong> Send BOG/VBDT to DEMON/DIABOLUS address → appear on the "Sinners Wall"</li>
-            <li><strong>Eternal Candle:</strong> Send USVT+DEMON or VBST+VBDC to God's address → eternal candle (never expires)</li>
-            <li><strong>40+ Spiritual Deeds:</strong> Various actions (prayers, memorials, donations, NFT icons, pilgrim certificates)</li>
-            <li><strong>Confession:</strong> Anonymous confession with automatic answer from the database</li>
-            <li><strong>DAO:</strong> Token holders can vote on treasury allocation and project development</li>
-        </ul>
-
-        <h2>5. Tokenomics</h2>
+        <h3>Tokenomics</h3>
         <ul class="list-disc pl-6 space-y-1">
             <li><strong>Total supply per token:</strong> 10,000,000,000 (10 billion)</li>
             <li><strong>Decimals:</strong> 9</li>
-            <li><strong>Standard:</strong> Solana Token-2022</li>
-            <li><strong>Transfer fee:</strong> 0% (free transfers)</li>
+            <li><strong>Transfer fee:</strong> 0%</li>
             <li><strong>Mint & Freeze authorities:</strong> Revoked (fixed supply)</li>
         </ul>
 
-        <h2>6. Roadmap</h2>
-        <div class="space-y-2">
-            <div><span class="text-gold-light font-bold">Q1 2025:</span> Token creation (BOG, USVT, DEMON, VBDT, VBST, VBDC), website launch, basic mechanics (For God / Against God / Eternal Candle)</div>
-            <div><span class="text-gold-light font-bold">Q2 2025:</span> 40 Spiritual Deeds, Confession page, DAO voting, Charity funds, Memory Book</div>
-            <div><span class="text-gold-light font-bold">Q3 2025:</span> NFT icons, Pilgrim tracker, Parish support program, Mobile app (view-only)</div>
-            <div><span class="text-gold-light font-bold">Q4 2025:</span> Integration with real churches (donations in fiat), Partnerships with Orthodox/Catholic organizations, Multi-language marketing campaign</div>
-        </div>
-
-        <h2>7. Revenue Model</h2>
+        <h2>4. Core Mechanics</h2>
         <ul class="list-disc pl-6 space-y-1">
-            <li><strong>Token sales:</strong> Users buy tokens on DEX (Meteora, Jupiter)</li>
-            <li><strong>Transaction fees:</strong> None (0% transfer fee) — but users pay Solana gas fees</li>
-            <li><strong>Future optional services:</strong> Premium confession (chat with a real priest), parish subscriptions, banner advertising</li>
+            <li><strong>For God:</strong> Send 1 USVT to BOG address → light a candle (1 hour)</li>
+            <li><strong>Against God:</strong> Send 1 BOG to DEMON address → appear on the "Sinners Wall"</li>
+            <li><strong>Eternal Candle:</strong> Send 1 USVT + 1 DEMON to BOG address → eternal candle (never expires)</li>
+            <li><strong>40+ Spiritual Deeds:</strong> Various actions (prayers, memorials, donations, NFT icons, pilgrim certificates)</li>
+            <li><strong>Confession:</strong> Anonymous confession with automatic answer</li>
+            <li><strong>DAO:</strong> BOG holders can vote on treasury allocation</li>
         </ul>
 
-        <h2>8. Security & Transparency</h2>
+        <h2>5. Smart Contract Security</h2>
         <ul class="list-disc pl-6 space-y-1">
             <li>All token contracts are verified on Solscan</li>
             <li>Mint and freeze authorities are revoked — no one can mint new tokens or freeze wallets</li>
             <li>All transactions are recorded on Solana blockchain and publicly visible</li>
-            <li>No central control — the website only provides a convenient interface for interacting with smart contracts</li>
+            <li>No central control — the website only provides a convenient interface</li>
         </ul>
 
-        <h2>9. Legal Disclaimer</h2>
+        <h2>6. Roadmap</h2>
+        <ul class="list-disc pl-6 space-y-1">
+            <li><strong>Q1 2025:</strong> Token creation (BOG, USVT, DEMON), website launch, basic mechanics</li>
+            <li><strong>Q2 2025:</strong> 40 Spiritual Deeds, Confession page, DAO voting, Charity funds, Memory Book</li>
+            <li><strong>Q3 2025:</strong> NFT icons, Pilgrim tracker, Parish support program</li>
+            <li><strong>Q4 2025:</strong> Integration with real churches, partnerships, marketing campaign</li>
+        </ul>
+
+        <h2>7. Revenue Model</h2>
+        <ul class="list-disc pl-6 space-y-1">
+            <li><strong>Token sales:</strong> Users buy tokens on DEX (Meteora, Jupiter)</li>
+            <li><strong>Transaction fees:</strong> None (0% transfer fee) — users pay Solana gas fees</li>
+            <li><strong>Future optional services:</strong> Premium confession (chat with a real priest), parish subscriptions</li>
+        </ul>
+
+        <h2>8. Legal Disclaimer</h2>
         <p>Chain Bank tokens are not securities, investment contracts, or financial instruments. They are designed exclusively for spiritual and charitable purposes within the ecosystem. The project does not guarantee any financial return. Users are responsible for complying with their local laws regarding cryptocurrencies.</p>
     </div>
 
     <div class="text-center text-xs opacity-50 mt-8 pb-4">
-        © 2025 Chain Bank · Faith, hope, love and blockchain
+        © 2025 Chain Bank (Orthodox Branch) · Faith, hope, love and blockchain
     </div>
 </div>
 <script>
