@@ -25,7 +25,7 @@
 <body class="p-4 md:p-6">
 <div class="max-w-7xl mx-auto">
 
-    <!-- Шапка -->
+    <!-- Шапка с переключателем на католиков -->
     <div class="flex flex-wrap justify-between items-center gap-3 mb-8 pb-4 border-b border-gold/30">
         <div class="flex items-center gap-3">
             <span class="text-3xl">⛪</span>
@@ -33,7 +33,12 @@
             <span class="text-xl opacity-60">|</span>
             <span class="text-sm opacity-70 hidden md:inline" data-i18n="motto">Orthodox · Faith in Blockchain</span>
         </div>
-        <div id="lang-switcher" class="flex flex-wrap gap-1"></div>
+        <div class="flex flex-wrap gap-2 items-center">
+            <a href="https://byt-assist.github.io/catholic-chainbank/" class="btn-secondary px-3 py-1 rounded-full text-xs flex items-center gap-1">
+                <span>✝️</span> <span>Католическая ветка</span>
+            </a>
+            <div id="lang-switcher" class="flex flex-wrap gap-1"></div>
+        </div>
     </div>
 
     <!-- Меню навигации -->
@@ -55,15 +60,11 @@
             <div id="calendar"></div>
         </div>
         <div class="glass">
-            <h2 class="text-xl font-bold mb-3" data-i18n="live_mass">📺 Прямая трансляция из храма</h2>
+            <h2 class="text-xl font-bold mb-3" data-i18n="live_mass">📺 Прямая трансляция</h2>
             <div class="aspect-video">
-                <iframe src="https://open.ivideon.com/embed/v3/100-GsrtYvLbo3Q2hCwpSW3q0y:0/" 
-                        class="w-full h-full rounded-xl" 
-                        allow="autoplay; fullscreen; clipboard-write; picture-in-picture" 
-                        allowfullscreen>
-                </iframe>
+                <iframe src="https://open.ivideon.com/embed/v3/100-GsrtYvLbo3Q2hCwpSW3q0y:0/" class="w-full h-full rounded-xl" allow="autoplay; fullscreen; clipboard-write; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <p class="text-xs opacity-60 text-center mt-2">📡 Круглосуточная трансляция</p>
+            <p class="text-xs opacity-60 text-center mt-2">📡 Holy Trinity Church, Toronto — 24/7</p>
         </div>
     </div>
 
