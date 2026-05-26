@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquidity & Asset Backing — Halal Chain Bank</title>
+    <link rel="icon" href="favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #FDF5E6 0%, #F0E6D2 100%); }
+        .arabic-font { font-family: 'Amiri', serif; }
+        .cert-badge { transition: transform 0.2s; }
+        .cert-badge:hover { transform: scale(1.02); }
+        .gallery-img { transition: transform 0.3s; cursor: pointer; }
+        .gallery-img:hover { transform: scale(1.05); }
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; align-items: center; justify-content: center; }
+        .lightbox.active { display: flex; }
+        .lightbox-img { max-width: 90%; max-height: 90%; }
+    </style>
+</head>
+<body>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" class="lightbox-img" src="">
+    <button class="absolute top-4 right-4 text-white text-3xl" onclick="closeLightbox()">&times;</button>
+</div>
+
+<!-- Header -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+        <div class="flex items-center space-x-3">
+            <img src="logo.png" class="h-10" onerror="this.src='https://placehold.co/200x60/1a1a1a/FFD700?text=HCB'">
+            <span class="text-xl font-bold arabic-font">Halal Chain Bank</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <select id="lang-select" class="bg-gray-100 border rounded-lg px-3 py-1.5 text-sm">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="ar">العربية</option>
+            </select>
+            <button id="wallet-btn" class="bg-gray-900 text-white px-4 py-2 rounded-lg"><i class="fas fa-wallet"></i><span id="wallet-address">Connect</span></button>
+        </div>
+    </div>
+    <div class="border-t">
+        <div class="container mx-auto px-4 flex gap-4">
+            <a href="index.html" id="nav-home">Home</a>
+            <a href="actions.html" id="nav-actions">99 Good Deeds</a>
+            <a href="confession.html" id="nav-confession">Tawbah</a>
+            <a href="liquidity.html" class="border-b-2 border-yellow-500 font-semibold" id="nav-liquidity">Liquidity</a>
+            <a href="whitepaper.html" id="nav-whitepaper">Whitepaper</a>
+        </div>
+    </div>
+</header>
+
+<main class="container mx-auto px-4 py-8 max-w-6xl">
+    <!-- Hero -->
+    <div class="text-center mb-8">
+        <i class="fas fa-gem text-5xl text-amber-600 mb-4"></i>
+        <h1 class="text-3xl md:text-4xl font-bold mb-2" id="main-title">Physical Asset Backing</h1>
+        <p class="text-gray-600 max-w-2xl mx-auto" id="main-subtitle">100,000 tonnes of 4N Copper (99.99% purity) — premium ingots backing the Halal Chain Bank ecosystem.</p>
+    </div>
+
+    <!-- Asset Details Card -->
+    <div class="bg-gradient-to-r from-amber-900 to-amber-800 text-white rounded-xl shadow-lg p-6 mb-8">
+        <div class="flex flex-wrap justify-between items-center gap-4">
+            <div>
+                <p class="text-sm opacity-80">CEBIL DIAMONDS / UAE</p>
+                <p class="text-2xl font-bold">Commodity: Copper 4N (99.99%)</p>
+                <p class="font-mono text-sm mt-2">Lot Number: CD-CU-12MAY26</p>
+                <p class="font-mono text-sm">Weight Allocated: 100,000 T</p>
+                <p class="font-mono text-sm">Inspection Date: 12 May 2026</p>
+                <p class="text-sm mt-2">Physical Asset under SKR Framework</p>
+            </div>
+            <div class="text-right">
+                <p class="text-3xl font-bold">$3,500,000,000</p>
+                <p class="text-sm opacity-80">Total Asset Value</p>
+                <div class="mt-2 inline-block bg-amber-700 px-3 py-1 rounded-full text-xs">✅ SKR Certified</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery (3 Photos) -->
+    <div class="grid md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <img src="warehouse1.jpg" class="gallery-img w-full h-48 object-cover" onclick="openLightbox(this.src)" alt="Warehouse Photo 1" onerror="this.src='https://placehold.co/400x300/amber-200/white?text=Warehouse+Photo+1'">
+            <div class="p-3 text-center">
+                <p class="text-xs text-gray-500">CEBIL DIAMONDS — UAE Warehouse</p>
+                <p class="text-xs text-gray-400">4N Copper Ingots (99.99%)</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <img src="warehouse2.jpg" class="gallery-img w-full h-48 object-cover" onclick="openLightbox(this.src)" alt="Warehouse Photo 2" onerror="this.src='https://placehold.co/400x300/amber-200/white?text=Warehouse+Photo+2'">
+            <div class="p-3 text-center">
+                <p class="text-xs text-gray-500">Lot CD-CU-12MAY26 — Stacked</p>
+                <p class="text-xs text-gray-400">50kg Ingots × 2,000,000</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <img src="warehouse3.jpg" class="gallery-img w-full h-48 object-cover" onclick="openLightbox(this.src)" alt="Warehouse Photo 3" onerror="this.src='https://placehold.co/400x300/amber-200/white?text=Warehouse+Photo+3'">
+            <div class="p-3 text-center">
+                <p class="text-xs text-gray-500">SGS Inspection Stamp</p>
+                <p class="text-xs text-gray-400">Report No. MRTEC2301429302</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Proof -->
+    <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+        <div class="flex items-center gap-3 mb-4">
+            <i class="fas fa-video text-3xl text-red-600"></i>
+            <h2 class="text-xl font-bold">Warehouse Video Proof</h2>
+            <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">SKR Framework Verified</span>
+        </div>
+        <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center border-2 border-gray-300 overflow-hidden">
+            <video id="warehouse-video" class="w-full h-full" controls poster="video-poster.jpg">
+                <source src="warehouse_tour.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <p class="text-xs text-gray-400 mt-3 text-center">*Video evidence: 100,000 tonnes of 4N Copper ingots | LME approved facility | Inspection Date: 12 May 2026</p>
+    </div>
+
+    <!-- Certificates & Audits -->
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <div class="flex items-center gap-3 mb-4">
+                <i class="fas fa-certificate text-3xl text-blue-600"></i>
+                <h2 class="text-xl font-bold">Certificates & Audits</h2>
+            </div>
+            <div class="space-y-3">
+                <div class="cert-badge border rounded-lg p-3">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="font-semibold">SGS Audit Report</p>
+                            <p class="text-xs text-gray-500">Report No. MRTEC2301429302 | Date: 12 May 2026</p>
+                            <p class="text-xs text-gray-400">4N Purity Verified (99.99%)</p>
+                        </div>
+                        <a href="#" class="bg-blue-600 text-white px-3 py-1 rounded-lg text-sm"><i class="fas fa-download mr-1"></i>PDF</a>
+                    </div>
+                </div>
+                <div class="cert-badge border rounded-lg p-3">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="font-semibold">Bureau Veritas Inspection</p>
+                            <p class="text-xs text-gray-500">Certificate No. BV-CU-2026-05</p>
+                            <p class="text-xs text-gray-400">LME Approved Warehouse | UAE</p>
+                        </div>
+                        <a href="#" class="bg-blue-600 text-white px-3 py-1 rounded-lg text-sm"><i class="fas fa-download mr-1"></i>PDF</a>
+                    </div>
+                </div>
+                <div class="cert-badge border rounded-lg p-3">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="font-semibold">SKR Framework Certificate</p>
+                            <p class="text-xs text-gray-500">Physical Asset under SKR Framework</p>
+                            <p class="text-xs text-gray-400">Lot: CD-CU-12MAY26 | 100,000 T</p>
+                        </div>
+                        <a href="#" class="bg-blue-600 text-white px-3 py-1 rounded-lg text-sm"><i class="fas fa-download mr-1"></i>PDF</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Calculator -->
+        <div class="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl shadow-lg p-6 border border-amber-200">
+            <div class="flex items-center gap-3 mb-4">
+                <i class="fas fa-calculator text-3xl text-amber-600"></i>
+                <h2 class="text-xl font-bold">Live Value Calculator</h2>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">4N Copper price (USD/tonne):</label>
+                    <input type="number" id="price-input" class="w-full border border-gray-300 rounded-lg px-4 py-2" value="35000" step="500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Total tonnes:</label>
+                    <input type="number" id="tonnes-input" class="w-full border border-gray-300 rounded-lg px-4 py-2" value="100000" step="1000">
+                </div>
+                <div class="bg-amber-100 rounded-lg p-4 text-center">
+                    <p class="text-sm text-gray-600 mb-1">Total value in USD</p>
+                    <p class="text-3xl font-bold text-amber-800" id="calc-total">$3,500,000,000</p>
+                    <p class="text-xs text-gray-500 mt-2">≈ $35.00 per kg | ≈ $15.88 per lb</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Price Charts -->
+    <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+        <div class="flex items-center gap-3 mb-4">
+            <i class="fas fa-chart-line text-3xl text-green-600"></i>
+            <h2 class="text-xl font-bold">4N Copper Market Data</h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="font-semibold mb-2">4N Premium Copper Price (USD/tonne)</h3>
+                <div class="h-48 bg-gray-50 rounded-lg p-2">
+                    <canvas id="premium-chart"></canvas>
+                </div>
+            </div>
+            <div>
+                <h3 class="font-semibold mb-2">Premium vs Standard Copper</h3>
+                <div class="h-48 bg-gray-50 rounded-lg p-2">
+                    <canvas id="comparison-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ingot Specifications -->
+    <div class="bg-white rounded-xl shadow-lg p-6 overflow-x-auto">
+        <div class="flex items-center gap-3 mb-4">
+            <i class="fas fa-chart-simple text-3xl text-purple-600"></i>
+            <h2 class="text-xl font-bold">Ingot Specifications — Lot CD-CU-12MAY26</h2>
+        </div>
+        <table class="min-w-full text-sm">
+            <thead class="bg-gray-50"><tr><th class="py-2 px-3 text-left">Specification</th><th class="py-2 px-3 text-left">Value</th></tr></thead>
+            <tbody>
+                <tr class="border-b"><td class="py-2 px-3">Commodity</td><td class="py-2 px-3 font-mono font-bold text-amber-700">Copper 4N (99.99%)</td></tr>
+                <tr class="border-b"><td class="py-2 px-3">Lot Number</td><td class="py-2 px-3 font-mono">CD-CU-12MAY26</td></tr>
+                <tr class="border-b"><td class="py-2 px-3">Weight Allocated</td><td class="py-2 px-3 font-mono">100,000 tonnes</td></tr>
+                <tr class="border-b"><td class="py-2 px-3">Purity</td><td class="py-2 px-3 font-mono">99.99% (4N)</td></tr>
+                <tr class="border-b"><td class="py-2 px-3">Weight per ingot</td><td class="py-2 px-3 font-mono">50 kg ± 0.5%</td></tr>
+                <tr class="border-b"><td class="py-2 px-3">Total ingots</td><td class="py-2 px-3 font-mono">2,000,000</td></tr>
+                <tr class="border-b"><td class="py-2 px-3">Inspection Date</td><td class="py-2 px-3 font-mono">12 May 2026</td></tr>
+                <tr class="border-b"><td class="py-2 px-3">Location</td><td class="py-2 px-3 font-mono">CEBIL DIAMONDS — UAE</td></tr>
+                <tr class="border-b"><td class="py-2 px-3">Framework</td><td class="py-2 px-3 font-mono text-green-700">SKR Framework — Physical Asset</td></tr>
+                <tr><td class="py-2 px-3">Certification</td><td class="py-2 px-3 font-mono">SGS | Bureau Veritas | LME Grade A</td></tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer class="bg-gray-900 text-white mt-12 py-6 text-center text-sm">
+    <p>© 2025 Halal Chain Bank — Halal blockchain bank</p>
+    <p class="text-gray-400 text-xs mt-2">Physical asset backing: 100,000 tonnes of 4N (99.99%) premium copper ingots. Lot CD-CU-12MAY26. SKR Framework certified. SGS & Bureau Veritas audited.</p>
+</footer>
+
+<script>
+// ==================== TRANSLATIONS ====================
+const translations = {
+    en: { nav_home: "Home", nav_actions: "99 Good Deeds", nav_confession: "Tawbah", nav_liquidity: "Liquidity", nav_whitepaper: "Whitepaper", main_title: "4N Copper Asset Backing", main_subtitle: "100,000 tonnes of 99.99% pure copper ingots — premium physical assets backing the Halal Chain Bank ecosystem.", connect_wallet: "Connect" },
+    ru: { nav_home: "Главная", nav_actions: "99 Добрых дел", nav_confession: "Тауба", nav_liquidity: "Ликвидность", nav_whitepaper: "Whitepaper", main_title: "Актив — 4N медь", main_subtitle: "100 000 тонн слитков меди чистотой 99.99% — премиальный физический актив Halal Chain Bank.", connect_wallet: "Подключить" },
+    ar: { nav_home: "الرئيسية", nav_actions: "99 عملاً صالحاً", nav_confession: "توبة", nav_liquidity: "سيولة", nav_whitepaper: "الورقة البيضاء", main_title: "أصول النحاس 4N", main_subtitle: "100,000 طن من سبائك النحاس النقي بنسبة 99.99% — أصول مادية تدعم النظام البيئي.", connect_wallet: "ربط" }
+};
+
+let currentLang = 'en';
+let currentPrice = 35000;
+
+function applyLanguage() {
+    const t = translations[currentLang];
+    if (!t) return;
+    document.getElementById('nav-home').innerText = t.nav_home;
+    document.getElementById('nav-actions').innerText = t.nav_actions;
+    document.getElementById('nav-confession').innerText = t.nav_confession;
+    document.getElementById('nav-liquidity').innerText = t.nav_liquidity;
+    document.getElementById('nav-whitepaper').innerText = t.nav_whitepaper;
+    document.getElementById('main-title').innerText = t.main_title;
+    document.getElementById('main-subtitle').innerText = t.main_subtitle;
+    document.getElementById('wallet-address').innerText = t.connect_wallet;
+}
+
+function updateAllCalculations() {
+    const tonnes = parseFloat(document.getElementById('tonnes-input').value) || 100000;
+    const totalValue = currentPrice * tonnes;
+    document.getElementById('calc-total').innerText = `$${totalValue.toLocaleString()}`;
+}
+
+document.getElementById('price-input').addEventListener('input', (e) => { currentPrice = parseFloat(e.target.value) || 35000; updateAllCalculations(); });
+document.getElementById('tonnes-input').addEventListener('input', () => updateAllCalculations());
+
+function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').classList.add('active'); }
+function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+
+function createCharts() {
+    new Chart(document.getElementById('premium-chart'), { type: 'line', data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], datasets: [{ label: '4N Premium Copper (USD/tonne)', data: [31000, 32500, 33800, 34500, 35000, 35200], borderColor: 'rgb(245, 158, 11)', fill: true, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: true } });
+    new Chart(document.getElementById('comparison-chart'), { type: 'line', data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], datasets: [{ label: 'Standard LME Copper', data: [10300, 10800, 11200, 11500, 11700, 11850], borderColor: 'rgb(59, 130, 246)', fill: true, tension: 0.3 }, { label: '4N Premium Copper', data: [31000, 32500, 33800, 34500, 35000, 35200], borderColor: 'rgb(245, 158, 11)', fill: true, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: true } });
+}
+
+let wallet = null;
+async function connectWallet() { if (window.solana?.isPhantom) { await window.solana.connect(); wallet = window.solana; document.getElementById('wallet-address').innerText = wallet.publicKey.toString().slice(0,4)+'...'+wallet.publicKey.toString().slice(-4); } else { alert("Install Phantom"); } }
+document.getElementById('wallet-btn').addEventListener('click', connectWallet);
+document.getElementById('lang-select').addEventListener('change', (e) => { currentLang = e.target.value; localStorage.setItem('lang', currentLang); applyLanguage(); });
+let savedLang = localStorage.getItem('lang'); if (savedLang && translations[savedLang]) currentLang = savedLang;
+document.getElementById('lang-select').value = currentLang;
+applyLanguage();
+updateAllCalculations();
+createCharts();
+</script>
+</body>
+</html>
